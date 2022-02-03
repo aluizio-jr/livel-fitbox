@@ -9,14 +9,14 @@ function getPost()
         return $_POST;
     }
 
-    // when using application/json as the HTTP Content-Type in the request 
-    $post = json_decode(file_get_contents('php://input'), true);
-    if(json_last_error() == JSON_ERROR_NONE)
-    {
-        return $post;
-    }
+    // // when using application/json as the HTTP Content-Type in the request 
+    // $post = json_decode(file_get_contents('php://input'), true);
+    // if(json_last_error() == JSON_ERROR_NONE)
+    // {
+    //     return $post;
+    // }
 
-    return [];
+    // return [];
 }
 
 print_r(getPost());
