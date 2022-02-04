@@ -5,6 +5,13 @@
 
     $vendaPost = getPost();
 
-   echo 'ID Aluno: ' . $vendaPost['id_aluno'];
-   echo "\n";
-   echo 'Data Venda: ' . $vendaPost['venda_data'];
+//    echo 'ID Aluno: ' . $vendaPost['id_aluno'];
+//    echo "\n";
+//    echo 'Data Venda: ' . $vendaPost['venda_data'];
+foreach ($vendaPost as $row)
+{
+    foreach($row as $i => $a)
+    {
+        echo $i.": ".$a;
+    }
+}
