@@ -5,7 +5,8 @@
 
     $vendaPost = getPost();
 
-    gravarVenda($vendaPost);
+    $retVenda = gravarVenda($vendaPost);
+    echo $retVenda;
 
     function gravarVenda($vendaData) {
         try {
