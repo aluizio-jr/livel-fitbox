@@ -6,7 +6,7 @@
     $vendaPost = getPost();
 
     gravarVenda($vendaPost);
-    
+
     function gravarVenda($vendaData) {
         try {
             $venda_count = count($vendaPost);
@@ -16,7 +16,7 @@
 
         } catch(Exception $e) {
             http_response_code(400);
-            return ["error" => $e->getMessage()];
+            return json_encode(["error" => $e->getMessage()], JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
         }
     }
 
