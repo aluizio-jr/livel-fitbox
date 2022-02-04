@@ -8,10 +8,19 @@
 //    echo 'ID Aluno: ' . $vendaPost['id_aluno'];
 //    echo "\n";
 //    echo 'Data Venda: ' . $vendaPost['venda_data'];
-foreach ($vendaPost as $row)
+function recursive_show_array($arr)
 {
-    foreach($row as $i => $a)
+    foreach($arr as $value)
     {
-        echo $i.": ".$a;
+        if(is_array($value))
+        {
+            recursive_show_array($value);
+        }
+        else
+        {
+            echo $value;
+        }
     }
 }
+
+recursive_show_array($vendaPost);
