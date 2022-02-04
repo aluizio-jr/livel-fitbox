@@ -18,20 +18,3 @@
     echo "Itens: " . $itens_count;
     echo "\n";
     echo "Parcelas: " . $parcelas_count;
-
-function recursive_show_array($arr)
-{
-    foreach($arr as $value)
-    {
-        if(is_array($value))
-        {
-            recursive_show_array($value);
-        }
-        else
-        {
-            echo $value;
-        }
-    }
-}
-
-recursive_show_array($vendaPost);
