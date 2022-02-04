@@ -3,6 +3,8 @@
     require_once "classes/functions.php";
     require_once "classes/post_data.php";
 
-    $venda_data = getPost();
+    $vendaPost = getPost();
 
-    print_r($venda_data);
+   echo $vendaPost->id_aluno;
+   echo "\n";
+   echo $vendaPost->venda_data;
