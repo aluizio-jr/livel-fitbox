@@ -5,16 +5,18 @@
 
     $vendaPost = getPost();
 
-//    echo 'ID Aluno: ' . $vendaPost['id_aluno'];
-//    echo "\n";
-//    echo 'Data Venda: ' . $vendaPost['venda_data'];
+    gravarVenda($vendaPost);
+    
+    function gravarVenda($vendaData) {
+        try {
+            $venda_count = count($vendaPost);
+            $itens_count = count($vendaPost['itens']);
+            $parcelas_count = count($vendaPost['parcelas']);
+            throw new Exception('foo');
 
-    $venda_count = count($vendaPost);
-    $itens_count = count($vendaPost['itens']);
-    $parcelas_count = count($vendaPost['parcelas']);
+        } catch(Exception $e) {
+            http_response_code(400);
+            return ["error" => $e->getMessage()];
+        }
+    }
 
-    echo "Venda: " . $venda_count;
-    echo "\n";
-    echo "Itens: " . $itens_count;
-    echo "\n";
-    echo "Parcelas: " . $parcelas_count;
