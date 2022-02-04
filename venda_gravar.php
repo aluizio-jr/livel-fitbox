@@ -5,6 +5,6 @@
 
     $vendaPost = getPost();
 
-   echo $vendaPost->id_aluno;
+   echo 'ID Aluno: ' . $vendaPost['id_aluno'];
    echo "\n";
-   echo $vendaPost->venda_data;
+   echo 'Data Venda: ' . $vendaPost['venda_data'];
