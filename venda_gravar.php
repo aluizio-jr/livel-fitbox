@@ -5,7 +5,7 @@
 
     function validaItens($vendaItens) {
         $itens_count = count($vendaItens);
-        if (!$itens_count) return ["validou"=>false, "error" => "Itens da venda nao informados."];
+        if (!$itens_count) return ["validou"=>false, "error" => "Itens da venda nao informados: " . $itens_count];
 
         for ($i=0; $i<$itens_count; $i++) {
             $item++;
