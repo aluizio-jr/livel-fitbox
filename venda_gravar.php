@@ -20,7 +20,7 @@
                 $vendaItens[$i]['id_plano_vigencia']
             );
 
-            if (!$itemPlano['retFn']) return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs'])];
+            if (!$itemPlano['retFn']) return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs']];
         }
 
         return ["validou"=>true, "error" => ""];
