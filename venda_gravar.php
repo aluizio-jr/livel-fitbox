@@ -40,8 +40,8 @@
         try {
             $validaVenda = validaVenda($vendaData);
             if (!$validaVenda['validou']) throw new Exception($validaVenda['error']);
-            return $vendaData['itens'];
-            
+            //return $vendaData['itens'];
+
             $validaItens = validaItens($vendaData['itens']);
             if (!$validaItens['validou']) throw new Exception($validaItens['error']);
 
