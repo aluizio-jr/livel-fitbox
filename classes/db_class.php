@@ -49,24 +49,28 @@
 	}
 
 	function queryBuscaValor($tabela, $campoRet, $campoBusca, $valorBusca, $join = '') {
-		$conn = bd_connect_livel();
-		if (!$conn) return false;
+		try {
+			$conn = bd_connect_livel();
+			if (!$conn) throw new Exception('Nao foi possivel conectar o banco de dados.');
 
-		$str_sql = "SELECT " . $campoRet . " FROM " . $tabela . " ";
-		$str_sql .= $join;
-		$str_sql .= " WHERE " . $campoBusca . " = '" . $valorBusca . "' LIMIT 1";
+			$str_sql = "SELECT " . $campoRet . " FROM " . $tabela . " ";
+			$str_sql .= $join;
+			$str_sql .= " WHERE " . $campoBusca . " = '" . $valorBusca . "' LIMIT 1";
 
-		$rs = mysqli_query($conn, $str_sql);	   
-		$num_rs = mysqli_num_rows($rs);
+			$rs = mysqli_query($conn, $str_sql);	   
+			$num_rs = mysqli_num_rows($rs);
 
-		if (!$num_rs > 0) return false;
+			if (!$num_rs > 0) throw new Exception('Query: ' . $str_sql);
 
-		while($r = mysqli_fetch_assoc($rs)) {
-			$retRs = $r[$campoRet];
-		}                         
+			while($r = mysqli_fetch_assoc($rs)) {
+				$retRs = $r[$campoRet];
+			}                         
 
-		return $retRs;
-			
+			return ["retFn" => true, "retRs" => $retRs];
+
+		} catch(Exception $e) {
+			return ["retFn" => false, "retRs" => $e->getMessage()];
+		}
 	}
 
 ?>

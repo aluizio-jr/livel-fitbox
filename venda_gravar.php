@@ -8,8 +8,9 @@
         if (!$itens_count) return ["validou"=>false, "error" => "Itens da venda nao informados."];
 
         for ($i=0; $i<$itens_count; $i++) {
+            $item = $i++;
             if (!$vendaItens[$i]['id_plano_vigencia']) {
-                return ["validou"=>false, "error" => "(Item: " . $i++ . ") ID do plano nao informado."];
+                return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao informado."];
             }
             
             $itemPlano = queryBuscaValor(
@@ -19,7 +20,7 @@
                 $vendaItens[$i]['id_plano_vigencia']
             );
 
-            if (!$itemPlano) return ["validou"=>false, "error" => "(Item: " . $i++ . ") ID do plano nao encontrado."];
+            if (!$itemPlano['retFn']) return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs'])];
         }
 
         return ["validou"=>true, "error" => ""];
