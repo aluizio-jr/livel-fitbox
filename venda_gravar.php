@@ -8,7 +8,7 @@
         if (!$itens_count) return ["validou"=>false, "error" => "Itens da venda nao informados."];
 
         for ($i=0; $i<$itens_count; $i++) {
-            $item = $i++;
+            $item++;
             if (!$vendaItens[$i]['id_plano_vigencia']) {
                 return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao informado."];
             }
