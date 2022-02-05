@@ -22,35 +22,53 @@
 
 	}
 
-	function next_id_cv($tabela, $campo) {
-		$conn = bd_connect_cv();
+	function nextID($tabela, $campo) {
+		$conn = bd_connect_livel();
 		if ($conn) {
-			$str_sql = "SELECT MAX(" . $campo . ") AS last_id 
-						 FROM " . $tabela;
+			$str_sql = "SELECT MAX(" . $campo . ") AS last_id FROM " . $tabela;
 
 			$rs_id = mysqli_query($conn, $str_sql);	   
 			$num_id = mysqli_num_rows($rs_id);    
 
 			if ($num_id > 0){
 				while($r = mysqli_fetch_assoc($rs_id)) {
-					$LastID = $r['last_id'];
-					$LastID++;
+					$lastID = $r['last_id'];
+					$lastID++;
 
 				}                         
 
 			} else {
-				$LastID = 1;
+				$lastID = 1;
 			}
 			
-			return $LastID;
+			return $lastID;
 			
 		} else {
 			return false;
 
 		}
 
+	function queryBuscaValor($tabela, $campoRet, $campoBusca, $valorBusca, $join = '') {
+		$conn = bd_connect_livel();
+		if (!$conn) return false;
 
+		$str_sql = "SELECT " . $campoRet . " FROM " . $tabela . " ";
+		$str_sql .= $join;
+		$str_sql .= " WHERE " . $campoBusca . " = '" . $valorBusca . "' LIMIT 1";
+
+		$rs = mysqli_query($conn, $str_sql);	   
+		$num_rs = mysqli_num_rows($rs);
+
+		if (!$num_rs > 0) return false;
+
+		while($r = mysqli_fetch_assoc($rs)) {
+			$retRs = $r[$campoRet];
+		}                         
+
+		return $retRs;
+			
 	}
+
 	function bd_connect_fitgroup() {
 
 		$host="fitgroup.com.br";
