@@ -65,7 +65,7 @@
 			$str_sql .= " LIMIT 1";
 
 			$rs = mysqli_query($conn, $str_sql);	   
-			if (!$rs) throw new Exception(mysqli_error($conn))
+			if (!$rs) throw new Exception(mysqli_error($conn));
 			
 			// $num_rs = mysqli_num_rows($rs);
 			// if (!$num_rs > 0) throw new Exception('Query: ' . $str_sql);
