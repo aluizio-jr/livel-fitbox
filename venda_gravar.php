@@ -18,6 +18,8 @@
                 "lo_plano_produtos.lo_id_produto_categoria" => 1
             ];
 
+            return ["validou"=>true, "filtros" => $filters];
+            
             $itemPlano = queryBuscaValor(
                 'lo_plano_produtos', 
                 ' COUNT(*) ', 
