@@ -12,7 +12,7 @@
             $validaItens = validaVendaItens($vendaData['itens']);
             if (!$validaItens['validou']) throw new Exception($validaItens['error']);
             
-            return ["validou" => true, "error": false];
+            return ["validou" => true, "error" => false];
 
             // $validaParcelas = validaParcelas($vendaData['[parcelas]']);
             // if (!$validaParcelas['validou']) throw new Exception($validaItens['error']);
