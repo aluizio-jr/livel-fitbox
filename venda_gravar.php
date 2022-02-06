@@ -18,7 +18,7 @@
                 "lo_id_produto_categoria" => 1
             ];
 
-            return ["validou"=>true, "filtros" => $filters];
+            return ["validou"=>false, "filtros" => $filters];
 
             $itemPlano = queryBuscaValor(
                 'lo_plano_produtos', 
