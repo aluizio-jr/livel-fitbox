@@ -4,58 +4,41 @@
     require_once "classes/post_data.php";
 
     function validaItens($vendaItens) {
-        $itens_count = count($vendaItens);
-        if (!$itens_count) return ["validou"=>false, "error" => "Itens da venda nao informados: " . $itens_count];
-
-        for ($i=0; $i<$itens_count; $i++) {
-            $item++;
-            if (!$vendaItens[$i]['id_plano_vigencia']) {
-                return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao informado."];
-            }
-
-            $filters = [
-                "lo_id_plano_vigencia" => $vendaItens[$i]['id_plano_vigencia'],
-                "lo_id_produto_categoria" => 1
-            ];
-
-            return ["validou"=>false, "filtros" => $filters];
-
-            $itemPlano = queryBuscaValor(
-                'lo_plano_produtos', 
-                ' COUNT(*) ', 
-                $filters,
-                ' JOIN lo_plano_vigencias USING(lo_id_plano) '
-            );
-
-            if (!$itemPlano['retFn']) return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs']];
-        }
-
-        return ["validou"=>true, "error" => ""];
-    }
-
-    function validaParcelas($vendaParcelas) {
-        $itens_count = count($vendaParcelas);
-        if (!$itens_count) return ["validou"=>false, "error" => "Parcelas da venda nao informadas: " . $itens_count];
-
-        for ($i=0; $i<$itens_count; $i++) {
-            $item++;
-            if (!$vendaItens[$i]['id_plano_vigencia']) {
-                return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao informado."];
-            }
+        try {
+            $itens_count = count($vendaItens);
+            if (!$itens_count) throw new Exception("Itens da venda nao informados."); //return ["validou"=>false, "error" => "Itens da venda nao informados: " . $itens_count];
             
-            $itemPlano = queryBuscaValor(
-                'lo_plano_vigencias', 
-                'lo_plano_vigencias.lo_id_plano', 
-                'lo_plano_vigencias.lo_id_plano_vigencia', 
-                $vendaItens[$i]['id_plano_vigencia']
-            );
+            for ($i=0; $i<$itens_count; $i++) {
+                $item++;
+                if (!$vendaItens[$i]['id_plano_vigencia']) {
+                    throw new Exception("(Item: " . $item . ") ID do plano nao informado.");
+                }
 
-            if (!$itemPlano['retFn']) return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs']];
+                $filters = [
+                    "lo_id_plano_vigencia" => $vendaItens[$i]['id_plano_vigencia'],
+                    "lo_id_produto_categoria" => 1
+                ];
+
+                //return ["validou"=>false, "filtros" => $filters];
+
+                $itemPlano = queryBuscaValor(
+                    'lo_plano_produtos', 
+                    ' COUNT(*) ', 
+                    $filters,
+                    ' JOIN lo_plano_vigencias USING(lo_id_plano) '
+                );
+
+                if (!$itemPlano['retFn']) return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs']];
+
+            } catch(Exception $e) {
+                return ["validou"=>false, "error" => $e->getMessage()];
+            }
         }
 
         return ["validou"=>true, "error" => ""];
     }
 
+    
     function validaVenda($vendaData) {
         $venda_count = count($vendaData);
         if (!$venda_count) return ["validou"=>false, "error" => "Dados da venda nao informados."];
@@ -70,7 +53,6 @@
         try {
             $validaVenda = validaVenda($vendaData);
             if (!$validaVenda['validou']) throw new Exception($validaVenda['error']);
-            return $vendaData['itens'];
 
             $validaItens = validaItens($vendaData['itens']);
             if (!$validaItens['validou']) throw new Exception($validaItens['error']);
