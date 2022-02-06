@@ -76,7 +76,7 @@
 			return ["retFn" => true, "retValor" => $retRs, "error" => $str_sql];
 
 		} catch(Exception $e) {
-			return ["retFn" => false, , "retValor" => false, "error" => $e->getMessage()];
+			return ["retFn" => false, "retValor" => false, "error" => $e->getMessage()];
 		}
 	}
 
