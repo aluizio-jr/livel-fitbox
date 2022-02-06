@@ -14,12 +14,12 @@
             }
 
             $filters = [
-                "lo_plano_vigencias.lo_id_plano_vigencia" => $vendaItens[$i]['id_plano_vigencia'],
-                "lo_plano_produtos.lo_id_produto_categoria" => 1
+                "lo_id_plano_vigencia" => $vendaItens[$i]['id_plano_vigencia'],
+                "lo_id_produto_categoria" => 1
             ];
 
             return ["validou"=>true, "filtros" => $filters];
-            
+
             $itemPlano = queryBuscaValor(
                 'lo_plano_produtos', 
                 ' COUNT(*) ', 
