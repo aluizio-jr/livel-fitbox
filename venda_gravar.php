@@ -75,11 +75,11 @@
             $validaItens = validaItens($vendaData['itens']);
             if (!$validaItens['validou']) throw new Exception($validaItens['error']);
 
-            $validaParcelas = validaParcelas($vendaData['[parcelas]']);
-            if (!$validaParcelas['validou']) throw new Exception($validaItens['error']);
+            // $validaParcelas = validaParcelas($vendaData['[parcelas]']);
+            // if (!$validaParcelas['validou']) throw new Exception($validaItens['error']);
 
-            $parcelas_count = count($vendaPost['parcelas']);
-            if (!$parcelas_count) throw new Exception('Parcelas da venda nao informadas.');
+            // $parcelas_count = count($vendaPost['parcelas']);
+            // if (!$parcelas_count) throw new Exception('Parcelas da venda nao informadas.');
 
         } catch(Exception $e) {
             http_response_code(400);
