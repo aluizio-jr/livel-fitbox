@@ -28,8 +28,10 @@
                     ' JOIN lo_plano_vigencias USING(lo_id_plano) '
                 );
 
-                if (!$itemPlano['retFn']) throw new Exception("(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs']);
-
+                if (!$itemPlano['retFn']) throw new Exception("(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['error']);
+                if($itemPlano['retValor'] && !$vendaItens[$i]['id_live_turma']) {
+                    throw new Exception("(Item: " . $item . ") Turma de Live nao informada");
+                }
             }
 
         } catch(Exception $e) {
@@ -57,7 +59,7 @@
 
             $validaItens = validaItens($vendaData['itens']);
             if (!$validaItens['validou']) throw new Exception($validaItens['error']);
-            return ["validou" => true, "error" => "Passou até itens"];
+            
 
             // $validaParcelas = validaParcelas($vendaData['[parcelas]']);
             // if (!$validaParcelas['validou']) throw new Exception($validaItens['error']);

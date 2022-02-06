@@ -63,8 +63,6 @@
 
 			$str_sql .= $str_where;
 			$str_sql .= " LIMIT 1";
-			
-			return ["retFn" => true, "retRs" => $str_sql];
 
 			$rs = mysqli_query($conn, $str_sql);	   
 			$num_rs = mysqli_num_rows($rs);
@@ -75,10 +73,10 @@
 				$retRs = $r[0];
 			}                         
 
-			return ["retFn" => true, "retRs" => $retRs];
+			return ["retFn" => true, "retValor" => $retRs, "error" => $str_sql];
 
 		} catch(Exception $e) {
-			return ["retFn" => false, "retRs" => $e->getMessage()];
+			return ["retFn" => false, , "retValor" => false, "error" => $e->getMessage()];
 		}
 	}
 
