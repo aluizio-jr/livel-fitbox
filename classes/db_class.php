@@ -63,7 +63,7 @@
 
 			$str_sql .= $str_where;
 			$str_sql .= " LIMIT 1";
-
+echo $str_sql;
 			$rs = mysqli_query($conn, $str_sql);	   
 			$num_rs = mysqli_num_rows($rs);
 
