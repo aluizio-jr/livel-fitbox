@@ -48,22 +48,28 @@
 		}
 	}
 
-	function queryBuscaValor($tabela, $campoRet, $campoBusca, $valorBusca, $join = '') {
+	function queryBuscaValor($tabela, $campoRet, $arrFilters, $join = '') {
 		try {
 			$conn = bd_connect_livel();
 			if (!$conn) throw new Exception('Nao foi possivel conectar o banco de dados.');
 
 			$str_sql = "SELECT " . $campoRet . " FROM " . $tabela . " ";
 			$str_sql .= $join;
-			$str_sql .= " WHERE " . $campoBusca . " = '" . $valorBusca . "' LIMIT 1";
 
+			foreach ($arrFilters as $campo => $valor) {
+				$str_where .= $str_where ? " AND " : " WHERE ";
+				$str_where .= $campo . " = '" . $valor . "'";
+			}
+
+			$str_where .= "' LIMIT 1";
+			
 			$rs = mysqli_query($conn, $str_sql);	   
 			$num_rs = mysqli_num_rows($rs);
 
 			if (!$num_rs > 0) throw new Exception('Query: ' . $str_sql);
 
 			while($r = mysqli_fetch_assoc($rs)) {
-				$retRs = $r[$campoRet];
+				$retRs = $r[0];
 			}                         
 
 			return ["retFn" => true, "retRs" => $retRs];

@@ -13,6 +13,34 @@
                 return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao informado."];
             }
             
+            $filters = [
+                "lo_plano_vigencias.lo_id_plano_vigencia" => $vendaItens[$i]['id_plano_vigencia'],
+                "lo_plano_produtos.lo_id_produto_categoria" => 1
+            ];
+
+            $itemPlano = queryBuscaValor(
+                'lo_plano_produtos', 
+                ' COUNT(*) ', 
+                $filters,
+                ' JOIN lo_plano_vigencias USING(lo_id_plano) '
+            );
+
+            if (!$itemPlano['retFn']) return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs']];
+        }
+
+        return ["validou"=>true, "error" => ""];
+    }
+
+    function validaParcelas($vendaParcelas) {
+        $itens_count = count($vendaParcelas);
+        if (!$itens_count) return ["validou"=>false, "error" => "Parcelas da venda nao informadas: " . $itens_count];
+
+        for ($i=0; $i<$itens_count; $i++) {
+            $item++;
+            if (!$vendaItens[$i]['id_plano_vigencia']) {
+                return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao informado."];
+            }
+            
             $itemPlano = queryBuscaValor(
                 'lo_plano_vigencias', 
                 'lo_plano_vigencias.lo_id_plano', 
@@ -45,11 +73,10 @@
             $validaItens = validaItens($vendaData['itens']);
             if (!$validaItens['validou']) throw new Exception($validaItens['error']);
 
-            $itens_count = count($vendaPost['itens']);
+            $validaParcelas = validaParcelas($vendaData['[parcelas]']);
+            if (!$validaParcelas['validou']) throw new Exception($validaItens['error']);
+
             $parcelas_count = count($vendaPost['parcelas']);
-            
-            
-            if (!$itens_count) throw new Exception('Itens da venda nao informados.');
             if (!$parcelas_count) throw new Exception('Parcelas da venda nao informadas.');
 
         } catch(Exception $e) {
