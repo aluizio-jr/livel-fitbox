@@ -29,13 +29,13 @@
                 );
 
                 if (!$itemPlano['retFn']) return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs']];
-
-            } catch(Exception $e) {
-                return ["validou"=>false, "error" => $e->getMessage()];
             }
+
+        } catch(Exception $e) {
+            return ["validou"=>false, "error" => $e->getMessage()];
         }
 
-        return ["validou"=>true, "error" => ""];
+            return ["validou"=>true, "error" => ""];
     }
 
     
