@@ -57,6 +57,7 @@
 
             $validaItens = validaItens($vendaData['itens']);
             if (!$validaItens['validou']) throw new Exception($validaItens['error']);
+            return ["validou" => true, "error" => "Passou até itens"];
 
             // $validaParcelas = validaParcelas($vendaData['[parcelas]']);
             // if (!$validaParcelas['validou']) throw new Exception($validaItens['error']);
