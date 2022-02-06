@@ -37,7 +37,10 @@
                     ' JOIN lo_plano_vigencias USING(lo_id_plano) '
                 );
 
-                if (!$itemPlano['retFn']) throw new Exception("(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['error']);
+                if ($itemPlano['error']) {
+                    throw new Exception("(Item: " . $item . ") Erro busca categoria Live:" . $itemPlano['error']);
+                }
+
                 if ($itemPlano['retValor'] && !$vendaItens[$i]['id_live_turma']) {
                     throw new Exception("(Item: " . $item . ") Turma de Live nao informada");
                 }

@@ -63,17 +63,18 @@
 
 			$str_sql .= $str_where;
 			$str_sql .= " LIMIT 1";
-echo $str_sql;
-			$rs = mysqli_query($conn, $str_sql);	   
-			$num_rs = mysqli_num_rows($rs);
 
-			if (!$num_rs > 0) throw new Exception('Query: ' . $str_sql);
+			$rs = mysqli_query($conn, $str_sql);	   
+			if (!$rs) throw new Exception(mysqli_error($conn))
+			
+			// $num_rs = mysqli_num_rows($rs);
+			// if (!$num_rs > 0) throw new Exception('Query: ' . $str_sql);
 
 			while($r = mysqli_fetch_assoc($rs)) {
 				$retRs = $r[0];
 			}                         
 
-			return ["retFn" => true, "retValor" => $retRs, "error" => $str_sql];
+			return ["retFn" => true, "retValor" => $retRs, "error" => false];
 
 		} catch(Exception $e) {
 			return ["retFn" => false, "retValor" => false, "error" => $e->getMessage()];
