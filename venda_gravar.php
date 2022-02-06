@@ -28,7 +28,8 @@
                     ' JOIN lo_plano_vigencias USING(lo_id_plano) '
                 );
 
-                if (!$itemPlano['retFn']) throw new Exception("(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs'];
+                if (!$itemPlano['retFn']) throw new Exception("(Item: " . $item . ") ID do plano nao encontrado. Result: " . $itemPlano['retRs']);
+
             }
 
         } catch(Exception $e) {
