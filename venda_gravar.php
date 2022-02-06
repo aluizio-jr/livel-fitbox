@@ -12,8 +12,7 @@
             if (!$vendaItens[$i]['id_plano_vigencia']) {
                 return ["validou"=>false, "error" => "(Item: " . $item . ") ID do plano nao informado."];
             }
-            return ["validou"=>true, "error" => "(Item: " . $item . ") tem plano."];
-            
+
             $filters = [
                 "lo_plano_vigencias.lo_id_plano_vigencia" => $vendaItens[$i]['id_plano_vigencia'],
                 "lo_plano_produtos.lo_id_produto_categoria" => 1

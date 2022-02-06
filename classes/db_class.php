@@ -61,8 +61,11 @@
 				$str_where .= $campo . " = '" . $valor . "'";
 			}
 
-			$str_where .= " LIMIT 1";
+			$str_sql .= $str_where;
+			$str_sql .= " LIMIT 1";
 			
+			return ["retFn" => true, "retRs" => $str_sql];
+
 			$rs = mysqli_query($conn, $str_sql);	   
 			$num_rs = mysqli_num_rows($rs);
 
