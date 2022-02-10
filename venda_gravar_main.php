@@ -23,9 +23,11 @@
                 . "'" . $dataVenda . "',"
                 . "'" . $horaVenda . "',"
                 . $statusVenda . ","
-                . $vendaData['id_venda_renovacao'] ?: 'NULL'
+                . $vendaData['id_venda_renovacao'] ? "'" . $vendaData['id_venda_renovacao'] . "'" : "NULL"
                 . ")";
                 
+                echo $str_sql;
+
                 mysqli_query($conn, $str_sql);
                 $result = mysqli_affected_rows($conn);
 
