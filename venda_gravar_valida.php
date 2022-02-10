@@ -68,15 +68,14 @@
                     if (!$vendaParcelas[$i]['id_cc'] || !count(!$vendaParcelas[$i]['dados_cc'])) {
                         throw new Exception("(Parcela: " . $item . ") Cartao de credito nao informado.");
                     }
-                }
 
-                if (count(!$vendaParcelas[$i]['dados_cc'])) {
-                    print_r($vendaParcelas[$i]);
-                    if (!$vendaParcelas[$i]['dados_cc'][0]['cc_numero']) throw new Exception("Numero do cartao nao informado.");
-                    if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_mes']) throw new Exception("Mes da validade do cartao nao informado.");
-                    if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_ano']) throw new Exception("Ano da validade do cartao nao informado.");
-                    if (!$vendaParcelas[$i]['dados_cc'][0]['cc_cvv']) throw new Exception("CVV do cartao nao informado.");
-                    if (!$vendaParcelas[$i]['dados_cc'][0]['titular_nome']) throw new Exception("Nome do titular do cartao nao informado.");
+                    if (!$vendaParcelas[$i]['id_cc']) {
+                        if (!$vendaParcelas[$i]['dados_cc'][0]['cc_numero']) throw new Exception("Numero do cartao nao informado.");
+                        if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_mes']) throw new Exception("Mes da validade do cartao nao informado.");
+                        if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_ano']) throw new Exception("Ano da validade do cartao nao informado.");
+                        if (!$vendaParcelas[$i]['dados_cc'][0]['cc_cvv']) throw new Exception("CVV do cartao nao informado.");
+                        if (!$vendaParcelas[$i]['dados_cc'][0]['titular_nome']) throw new Exception("Nome do titular do cartao nao informado.");            
+                    }     
                 }
 
                 $fpagList = [1, 5, 14, 18];
