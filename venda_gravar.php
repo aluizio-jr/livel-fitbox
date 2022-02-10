@@ -31,7 +31,7 @@
             if (!$retVendaMain['idVenda'])  throw new Exception($retVendaMain['error']);
 
 //GRAVA VENDA ITENS
-            $retVendaItens = vendaGravarItens($vendaData['itens']);
+            $retVendaItens = vendaGravarItens($retVendaMain['idVenda'], $vendaData['itens']);
             if (!$retVendaItens['vendaItens'])  throw new Exception($retVendaItens['error']);
 
 //GRAVA VENDA PARCELAS

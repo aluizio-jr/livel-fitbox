@@ -1,7 +1,8 @@
 <?php
-    function vendaGravarItens($vendaId, $vendaItens, $dataVenda = date('Y-m-d')) {
+    function vendaGravarItens($vendaId, $vendaItens, $dataVenda = false) {
         try {
             $totalItens = 0;
+            if (!$dataVenda) $dataVenda = date('Y-m-d');
             
             $itens_count = count($vendaItens);
             for ($i=0; $i<$itens_count; $i++) {
