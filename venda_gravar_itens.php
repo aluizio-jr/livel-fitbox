@@ -93,12 +93,12 @@
                     if ($itemValor > 0 && ($descontoValor || $descontoPercentual))
                         $itemDescontoValor = $descontoValor ?: (($itemValor * $descontoPercentual) / 100);
 
-                    $itemValorFinal = $itemValor - $itemDescontoValor
+                    $itemValorFinal = $itemValor - $itemDescontoValor;
 
                     $vendaValor += $itemValor;
                     $vendaValorFinal += $itemValorFinal;
 
-                    $arrFilters = ['lo_id_venda' => $vendaId]
+                    $arrFilters = ['lo_id_venda' => $vendaId];
                     $itemID = nextID('lo_venda_itens', 'lo_id_venda_item', $arrFilters);
                     if (!$itemID) throw new Exception("Nao foi possivel gerar o ID do item.");
 
