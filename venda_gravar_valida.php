@@ -71,6 +71,7 @@
                 }
 
                 if (count(!$vendaParcelas[$i]['dados_cc'])) {
+                    print_r($vendaParcelas[$i]['dados_cc']);
                     if (!$vendaParcelas[$i]['dados_cc'][0]['cc_numero']) throw new Exception("Numero do cartao nao informado.");
                     if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_mes']) throw new Exception("Mes da validade do cartao nao informado.");
                     if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_ano']) throw new Exception("Ano da validade do cartao nao informado.");
