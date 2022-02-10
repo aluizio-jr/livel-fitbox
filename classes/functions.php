@@ -1,7 +1,10 @@
 
 <?php
 
-	function vigenciaCalcula($vigenciaUnidade, $vigenciaQtde, $dataInicial = date('Y-m-d')) {
+	function vigenciaCalcula($vigenciaUnidade, $vigenciaQtde, $dataInicial = false) {
+		
+		if (!$dataInicial) $dataInicial = date('Y-m-d');
+
 		$dd = $vigenciaUnidade == 1 ? $vigenciaQtde : $vigenciaQtde*30;
 		$dayArg = ' + ' . $dd . ' days';
 		return date('Y-m-d', strtotime($dataInicial. $dayArg)); 

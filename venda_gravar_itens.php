@@ -1,6 +1,8 @@
 <?php
     function vendaGravarItens($vendaId, $vendaItens, $dataVenda = date('Y-m-d')) {
         try {
+            $totalItens = 0;
+            
             $itens_count = count($vendaItens);
             for ($i=0; $i<$itens_count; $i++) {
 
@@ -129,12 +131,12 @@
                         . str_replace(',', '.', $itemValorFinal)
                         . ")";
                         
-                        mysqli_query($conn, $str_sql);
-                        $result = mysqli_affected_rows($conn);
-        
-                        if($result <= 0) {                
-                            throw new Exception("Nao foi possivel gravar a venda (itens): " . mysqli_error($conn)); 
-                        }
+                    mysqli_query($conn, $str_sql);
+                    $result = mysqli_affected_rows($conn);
+    
+                    if($result <= 0) {                
+                        throw new Exception("Nao foi possivel gravar a venda (itens): " . mysqli_error($conn)); 
+                    }
                     
                     $totalItens++;
                 }
