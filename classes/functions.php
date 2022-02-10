@@ -1,5 +1,32 @@
 
 <?php
+
+	function vigenciaCalcula($vigenciaUnidade, $vigenciaQtde, $dataInicial = date('Y-m-d')) {
+		$dd = $vigenciaUnidade == 1 ? $vigenciaQtde : $vigenciaQtde*30;
+		$dayArg = ' + ' . $dd . ' days';
+		return date('Y-m-d', strtotime($dataInicial. $dayArg)); 
+	}
+
+	function cardIsValid($cardNumber)
+	{
+		$number = substr($cardNumber, 0, -1);
+		$doubles = [];
+
+		for ($i = 0, $t = strlen($number); $i < $t; ++$i) {
+			$doubles[] = substr($number, $i, 1) * ($i % 2 == 0? 2: 1);
+		}
+
+		$sum = 0;
+
+		foreach ($doubles as $double) {
+			for ($i = 0, $t = strlen($double); $i < $t; ++$i) {
+				$sum += (int) substr($double, $i, 1);
+			}
+		}
+
+		return substr($cardNumber, -1, 1) == (10-$sum%10)%10;
+	}
+
 	function DateDifDays ($dataIni, $dataFim = NULL) {
 		if(!$dataFim) $dataFim = date('Y-m-d');
 		
@@ -268,18 +295,7 @@
 		return $dat;
 		}
 	}
-	
-	function zero_left($tamanho, $str) {
 
-		if($tamanho > 0):
-			for ($i=1; $i=($tamanho - strlen($str)); $i++) {
-				$str = "0" . $str;
-			}
-		endif;
-		
-		return $str;
-	}
-	
 	function proper_case($frase) {
 		$words = explode(" ", $frase);
 		for ($i=0; $i<count($words); $i++) {
@@ -384,13 +400,6 @@
 		$seconds += (intval($s) / 60);
 		return $seconds;
 	}
-
-
-
-
-	
-
-
 /*
 	function date_add($data_ini, $valor, $tipo) {
 		

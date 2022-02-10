@@ -28,8 +28,6 @@
                     "lo_id_produto_categoria" => 1
                 ];
 
-                //return ["validou"=>false, "filtros" => $filters];
-
                 $itemPlano = queryBuscaValor(
                     'lo_plano_produtos', 
                     ' COUNT(*) ', 
@@ -43,6 +41,48 @@
 
                 if ($itemPlano['retValor'] && !$vendaItens[$i]['id_live_turma']) {
                     throw new Exception("(Item: " . $item . ") Turma de Live nao informada");
+                }
+
+                return ["validou"=>true, "error" => ""];
+            }
+
+        } catch(Exception $e) {
+            return ["validou"=>false, "error" => $e->getMessage()];
+            
+        }
+    }
+
+    function validaVendaParcelas($vendaParcelas) {
+        try {
+            $itens_count = count($vendaParcelas);
+            if (!$itens_count) throw new Exception("Parcelas da venda nao informadas.");
+            
+            for ($i=0; $i<$itens_count; $i++) {
+                $item++;
+                if (!$vendaParcelas[$i]['vencimento']) {
+                    throw new Exception("(Parcela: " . $item . ") Vencimento nao informado.");
+                }
+
+                $fpagList = [4, 20];
+                if (in_array($vendaParcelas[$i]['forma_pagamento'], $fpagList)) {
+                    if (!$vendaParcelas[$i]['id_cc'] || !count(!$vendaParcelas[$i]['dados_cc'])) {
+                        throw new Exception("(Parcela: " . $item . ") Cartao de credito nao informado.");
+                    }
+                }
+
+                if (count(!$vendaParcelas[$i]['dados_cc'])) {
+                    if (!$vendaParcelas[$i]['dados_cc'][0]['cc_numero']) throw new Exception("Numero do cartao nao informado.");
+                    if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_mes']) throw new Exception("Mes da validade do cartao nao informado.");
+                    if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_ano']) throw new Exception("Ano da validade do cartao nao informado.");
+                    if (!$vendaParcelas[$i]['dados_cc'][0]['cc_cvv']) throw new Exception("CVV do cartao nao informado.");
+                    if (!$vendaParcelas[$i]['dados_cc'][0]['titular_nome']) throw new Exception("Nome do titular do cartao nao informado.");
+                }
+
+                $fpagList = [1, 5, 14, 18];
+                if (in_array($vendaParcelas[$i]['forma_pagamento'], $fpagList)) {
+                    if (!$vendaParcelas[$i]['data_pagamento']) {
+                        throw new Exception("(Parcela: " . $item . ") Data de pagamento nao informada.");
+                    }
                 }
 
                 return ["validou"=>true, "error" => ""];

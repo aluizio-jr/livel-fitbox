@@ -22,10 +22,17 @@
 
 	}
 
-	function nextID($tabela, $campo) {
+	function nextID($tabela, $campo, $arrFilters = []) {
 		$conn = bd_connect_livel();
 		if ($conn) {
 			$str_sql = "SELECT MAX(" . $campo . ") AS last_id FROM " . $tabela;
+
+			foreach ($arrFilters as $campo => $valor) {
+				$str_where .= $str_where ? " AND " : " WHERE ";
+				$str_where .= $campo . " = '" . $valor . "'";
+			}
+
+			$str_sql .= $str_where;
 
 			$rs_id = mysqli_query($conn, $str_sql);	   
 			$num_id = mysqli_num_rows($rs_id);    

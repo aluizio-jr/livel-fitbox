@@ -48,15 +48,7 @@ function PresencaRegistro($get) {
         'message' => $msg_err ?: 'OK'
     );
 
-    return $return;
-     
-    // $dados = convert_to_utf8_recursively($return);
-    // //$str_json = json_encode($dados, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
-    // $str_json = json_encode($dados, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
-
-    // echo $str_json;
-
-        
+    return $return;        
 }
 
 ?>
