@@ -30,7 +30,7 @@
                 $result = mysqli_affected_rows($conn);
 
                 if($result <= 0) {                
-                    throw new Exception("Nao foi possivel gravar a venda (main): " . mysqli_error($conn)); 
+                    throw new Exception("Nao foi possivel gravar a venda (main): " . $str_sql . 'Erro: ' . mysqli_error($conn)); 
                 }
 
                 return ["idVenda" => $vendaID, "error" => false];
