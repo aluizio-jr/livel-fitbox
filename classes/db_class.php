@@ -76,7 +76,7 @@
 	
 		foreach ($camposValores as $campo => $valor) {
 			$strCampos .= ($strCampos ? ", " : "");
-			$strCampos .=  $campo . " = " ($valor ? "'" . $valor . "'" : "NULL");
+			$strCampos .=  $campo . " = " . ($valor ? "'" . $valor . "'" : "NULL");
 		}
 
 		$strUpdate = "UPDATE " . $tabela . " SET "  $strCampos;
