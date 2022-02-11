@@ -1,5 +1,5 @@
 <?php
-    function vendaGravarItens($vendaId, $vendaItens, $dataVenda = false) {
+    function vendaGravarItens($vendaId, $vendaItens, $conn, $dataVenda = false) {
         try {
             $totalItens = 0;
             if (!$dataVenda) $dataVenda = date('Y-m-d');

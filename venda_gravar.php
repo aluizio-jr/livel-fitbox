@@ -27,11 +27,11 @@
             $beginTrans = true;
 
 //GRAVA VENDA MAIN
-            $retVendaMain = vendaGravarMain($vendaData);
+            $retVendaMain = vendaGravarMain($vendaData, $conn);
             if (!$retVendaMain['idVenda'])  throw new Exception($retVendaMain['error']);
 
 //GRAVA VENDA ITENS
-            $retVendaItens = vendaGravarItens($retVendaMain['idVenda'], $vendaData['itens']);
+            $retVendaItens = vendaGravarItens($retVendaMain['idVenda'], $conn, $vendaData['itens']);
             if (!$retVendaItens['vendaItens'])  throw new Exception($retVendaItens['error']);
 
 //GRAVA VENDA PARCELAS

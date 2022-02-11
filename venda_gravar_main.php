@@ -1,5 +1,5 @@
 <?php
-    function vendaGravarMain($vendaData) {
+    function vendaGravarMain($vendaData, $conn) {
         try {
             $vendaID = nextID('lo_vendas', 'lo_id_venda');
             if (!$vendaID) throw new Exception("Nao foi possivel gerar o ID da venda.");
