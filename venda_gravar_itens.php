@@ -101,6 +101,7 @@
 
                     $arrFilters = ['lo_id_venda' => $vendaId];
                     $itemID = nextID('lo_venda_itens', 'lo_id_venda_item', $arrFilters);
+                    echo "Item " . $i . ": " . $itemID . "/n";
                     if (!$itemID) throw new Exception("Nao foi possivel gerar o ID do item.");
 
                     // $str_sql = " INSERT INTO lo_venda_itens (
@@ -149,7 +150,6 @@
                     ];
 
                     $str_sql = queryInsert("lo_venda_itens", $arrCampos);
-                    echo $str_sql;
 
                     mysqli_query($conn, $str_sql);
                     $result = mysqli_affected_rows($conn);
