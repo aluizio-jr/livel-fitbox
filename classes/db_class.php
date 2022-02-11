@@ -55,6 +55,35 @@
 		}
 	}
 
+	function queryInsert($tabela, $camposValores) {
+		foreach ($camposValores as $campo => $valor) {
+			$str_campos .= ($str_campos ? ", " : "") . $campo;
+
+			$str_valores .= ($str_valores ? ", " : "");
+			$str_valores .= ($valor ? "'" . $valor . "'" : "NULL")
+		}
+
+		$strInsert = "INSERT INTO " . $tabela . " (";
+		$strInsert .= $str_campos;
+		$strInsert .= ") VALUES (";
+		$strInsert .= $str_valores;
+		$strInsert .= ")";
+
+		return $strInsert;
+	}
+
+	function queryUpdate($tabela, $camposValores) {
+	
+		foreach ($camposValores as $campo => $valor) {
+			$strCampos .= ($strCampos ? ", " : "");
+			$strCampos .=  $campo . " = " ($valor ? "'" . $valor . "'" : "NULL");
+		}
+
+		$strUpdate = "UPDATE " . $tabela . " SET "  $strCampos;
+
+		return $strUpdate;
+	}
+
 	function queryBuscaValor($tabela, $campoRet, $arrFilters, $join = '') {
 		try {
 			$conn = bd_connect_livel();

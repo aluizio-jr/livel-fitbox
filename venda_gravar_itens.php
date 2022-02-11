@@ -103,36 +103,54 @@
                     $itemID = nextID('lo_venda_itens', 'lo_id_venda_item', $arrFilters);
                     if (!$itemID) throw new Exception("Nao foi possivel gerar o ID do item.");
 
-                    $str_sql = " INSERT INTO lo_venda_itens (
-                        lo_id_venda,
-                        lo_id_venda_item,
-                        lo_id_produto_valor,
-                        lo_id_produto_categoria,
-                        lo_id_plano_vigencia,
-                        lo_id_live_turma,
-                        lo_item_vigencia_inicio,
-                        lo_item_vigencia_fim,
-                        lo_item_quantidade,
-                        lo_item_valor,
-                        lo_id_cupom,
-                        lo_item_valor_desconto,
-                        lo_item_valor_final
-                        ) VALUES ("
-                        . $vendaID . ","
-                        . $itemID . ",";
-                        $str_sql .= $idProdutoValor ?: "NULL" . ",";
-                        $str_sql .= $idProdutoCategoria ?: "NULL" . ",";
-                        $str_sql .=  $planoVigenciaId . ",";
-                        $str_sql .= $turmaLiveId ?: "NULL" . ",";
-                        $str_sql .= $itemVigenciaInicial ? "'" . $itemVigenciaInicial . "'" : "NULL" . ",";
-                        $str_sql .= $itemVigenciaFinal ? "'" . $itemVigenciaFinal . "'" : "NULL" . ",";
-                        $str_sql .= $itemQuantidade ?: "NULL" . ",";
-                        $str_sql .= str_replace(',', '.', $itemValor) . ",";
-                        $str_sql .= $descontoCupom ? "'" . $descontoCupom . "'" : "NULL" . ",";
-                        $str_sql .=  str_replace(',', '.', $itemDescontoValor) . ","
-                        . str_replace(',', '.', $itemValorFinal)
-                        . ")";
-                        echo $str_sql;
+                    // $str_sql = " INSERT INTO lo_venda_itens (
+                    //     lo_id_venda,
+                    //     lo_id_venda_item,
+                    //     lo_id_produto_valor,
+                    //     lo_id_produto_categoria,
+                    //     lo_id_plano_vigencia,
+                    //     lo_id_live_turma,
+                    //     lo_item_vigencia_inicio,
+                    //     lo_item_vigencia_fim,
+                    //     lo_item_quantidade,
+                    //     lo_item_valor,
+                    //     lo_id_cupom,
+                    //     lo_item_valor_desconto,
+                    //     lo_item_valor_final
+                    //     ) VALUES ("
+                    //     . $vendaId . ","
+                    //     . $itemID . ",";
+                    //     $str_sql .= $idProdutoValor ?: "NULL" . ",";
+                    //     $str_sql .= $idProdutoCategoria ?: "NULL" . ",";
+                    //     $str_sql .=  $planoVigenciaId . ",";
+                    //     $str_sql .= $turmaLiveId ?: "NULL" . ",";
+                    //     $str_sql .= $itemVigenciaInicial ? "'" . $itemVigenciaInicial . "'" : "NULL" . ",";
+                    //     $str_sql .= $itemVigenciaFinal ? "'" . $itemVigenciaFinal . "'" : "NULL" . ",";
+                    //     $str_sql .= $itemQuantidade ?: "NULL" . ",";
+                    //     $str_sql .= str_replace(',', '.', $itemValor) . ",";
+                    //     $str_sql .= $descontoCupom ? "'" . $descontoCupom . "'" : "NULL" . ",";
+                    //     $str_sql .=  str_replace(',', '.', $itemDescontoValor) . ","
+                    //     . str_replace(',', '.', $itemValorFinal)
+                    //     . ")";
+                    $arrCampos = [
+                        "lo_id_venda" =>  $vendaId,
+                        "lo_id_venda_item" => $itemID,
+                        "lo_id_produto_valor" => $idProdutoValor ?: false,
+                        "lo_id_produto_categoria" => $idProdutoCategoria ?: false,
+                        "lo_id_plano_vigencia" => $planoVigenciaId,
+                        "lo_id_live_turma" => $turmaLiveId ?: false,
+                        "lo_item_vigencia_inicio" => $itemVigenciaInicial ?: false,
+                        "lo_item_vigencia_fim" => $itemVigenciaFinal ?: false,
+                        "lo_item_quantidade" => $itemQuantidade ?: false,
+                        "lo_item_valor" => str_replace(',', '.', $itemValor),
+                        "lo_id_cupom" => $descontoCupom ?: false,
+                        "lo_item_valor_desconto" => str_replace(',', '.', $itemDescontoValor),
+                        "lo_item_valor_final" => str_replace(',', '.', $itemValorFinal)
+                    ]
+
+                    $str_sql = queryInsert("lo_venda_itens", $arrCampos);
+                    echo $str_sql;
+
                     mysqli_query($conn, $str_sql);
                     $result = mysqli_affected_rows($conn);
     
