@@ -25,14 +25,12 @@
                 . $statusVenda . ","
                 . $vendaData['id_venda_renovacao'] ?: "NULL";
                 $str_sql .= ")";
-                
-                echo $str_sql;
 
                 mysqli_query($conn, $str_sql);
                 $result = mysqli_affected_rows($conn);
 
                 if($result <= 0) {                
-                    throw new Exception("Nao foi possivel gravar a venda (main): " . $conn . " - Erro: " . mysqli_error($conn)); 
+                    throw new Exception("Nao foi possivel gravar a venda (main): " . mysqli_error($conn)); 
                 }
 
                 return ["idVenda" => $vendaID, "error" => false];

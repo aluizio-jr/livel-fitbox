@@ -22,7 +22,7 @@
                     lo_plano_vigencias
                     WHERE
                     lo_plano_vigencias.lo_id_plano_vigencia = ' . $planoVigenciaId;
-
+echo $str_sql;
                 $rsPlano = mysqli_query($conn, $str_sql);	   
                 while($r = mysqli_fetch_assoc($rsPlano)) {
                     $planoId = $r['lo_id_plano'];
