@@ -22,8 +22,11 @@
                     lo_plano_vigencias
                     WHERE
                     lo_plano_vigencias.lo_id_plano_vigencia = ' . $planoVigenciaId;
-echo $str_sql;
+
                 $rsPlano = mysqli_query($conn, $str_sql);	   
+                $numPlano = mysqli_num_rows($rsPlano);
+                if (!$numPlano > 0) throw new Exception("Dados do plano nao encontrados.");
+                
                 while($r = mysqli_fetch_assoc($rsPlano)) {
                     $planoId = $r['lo_id_plano'];
                     $planoUnidade = $r['lo_id_unidade'];
@@ -32,7 +35,7 @@ echo $str_sql;
                     $planoParcelas = $r['lo_plano_vigencia_parcelas'];
                 }
 
-                if (!count($r)) throw new Exception("Dados do plano nao encontrados.");
+                
 
                 $r = array();
 
