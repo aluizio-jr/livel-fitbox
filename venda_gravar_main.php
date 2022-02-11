@@ -23,7 +23,7 @@
                 . "'" . $dataVenda . "',"
                 . "'" . $horaVenda . "',"
                 . $statusVenda . ","
-                . $vendaData['id_venda_renovacao'] ?: 'NULL'
+                . $vendaData['id_venda_renovacao']
                 . ")";
                 
                 echo $str_sql;
