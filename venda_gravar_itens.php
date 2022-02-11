@@ -37,7 +37,7 @@
 
                 $r = array();
 
-                $str_sql = 'SELECT
+                $str_sql = "SELECT
                     lo_plano_produtos.lo_id_plano_produto,
                     lo_plano_produtos.lo_id_produto_valor,
                     lo_plano_produtos.lo_id_produto_categoria,
@@ -47,7 +47,7 @@
                     lo_plano_produtos
                     LEFT OUTER JOIN lo_produtos_valores ON lo_plano_produtos.lo_id_produto_valor = lo_produtos_valores.lo_id_produto_valor
                     WHERE
-                    lo_plano_produtos.lo_id_plano = ' . $planoId;
+                    lo_plano_produtos.lo_id_plano = " . $planoId;
 
                 $rsItens = mysqli_query($conn, $str_sql);	   
                 $numItens = mysqli_num_rows($rsItens);
@@ -119,17 +119,17 @@
                         lo_item_valor_final
                         ) VALUES ("
                         . $vendaID . ","
-                        . $itemID . ","
-                        . $idProdutoValor ?: 'NULL' . ","
-                        . $idProdutoCategoria ?: 'NULL' . ","
-                        . $planoVigenciaId . "',"
-                        . $turmaLiveId ?: 'NULL' . ","
-                        . $itemVigenciaInicial ? "'" . $itemVigenciaInicial . "'" : 'NULL' . ","
-                        . $itemVigenciaFinal ? "'" . $itemVigenciaFinal . "'" : 'NULL' . ","
-                        . $itemQuantidade ?: 'NULL' . ","
-                        . str_replace(',', '.', $itemValor) . ","
-                        . $descontoCupom ? "'" . $descontoCupom . "'" : 'NULL' . ","
-                        . str_replace(',', '.', $itemDescontoValor) . ","
+                        . $itemID . ",";
+                        $str_sql .= $idProdutoValor ?: "NULL" . ",";
+                        $str_sql .= $idProdutoCategoria ?: "NULL" . ",";
+                        $str_sql .=  $planoVigenciaId . ",";
+                        $str_sql .= $turmaLiveId ?: "NULL" . ",";
+                        $str_sql .= $itemVigenciaInicial ? "'" . $itemVigenciaInicial . "'" : "NULL" . ",";
+                        $str_sql .= $itemVigenciaFinal ? "'" . $itemVigenciaFinal . "'" : "NULL" . ",";
+                        $str_sql .= $itemQuantidade ?: "NULL" . ",";
+                        $str_sql .= str_replace(',', '.', $itemValor) . ",";
+                        $str_sql .= $descontoCupom ? "'" . $descontoCupom . "'" : "NULL" . ",";
+                        $str_sql .=  str_replace(',', '.', $itemDescontoValor) . ","
                         . str_replace(',', '.', $itemValorFinal)
                         . ")";
                         echo $str_sql;
