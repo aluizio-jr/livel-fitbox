@@ -23,7 +23,7 @@
                 . "'" . $dataVenda . "',"
                 . "'" . $horaVenda . "',"
                 . $statusVenda . ","
-                . $vendaData['id_venda_renovacao']
+                . $vendaData['id_venda_renovacao'] ?: "NULL"
                 . ")";
                 
                 echo $str_sql;
@@ -32,7 +32,7 @@
                 $result = mysqli_affected_rows($conn);
 
                 if($result <= 0) {                
-                    throw new Exception("Nao foi possivel gravar a venda (main): " . $str_sql . 'Erro: ' . mysqli_error($conn)); 
+                    throw new Exception("Nao foi possivel gravar a venda (main): " . $result . " - Erro: " . mysqli_error($conn)); 
                 }
 
                 return ["idVenda" => $vendaID, "error" => false];
