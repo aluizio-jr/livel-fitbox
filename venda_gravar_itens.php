@@ -146,7 +146,7 @@
                         "lo_id_cupom" => $descontoCupom ?: false,
                         "lo_item_valor_desconto" => str_replace(',', '.', $itemDescontoValor),
                         "lo_item_valor_final" => str_replace(',', '.', $itemValorFinal)
-                    ]
+                    ];
 
                     $str_sql = queryInsert("lo_venda_itens", $arrCampos);
                     echo $str_sql;
