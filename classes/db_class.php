@@ -79,7 +79,7 @@
 			$strCampos .=  $campo . " = " . ($valor ? "'" . $valor . "'" : "NULL");
 		}
 
-		$strUpdate = "UPDATE " . $tabela . " SET "  $strCampos;
+		$strUpdate = "UPDATE " . $tabela . " SET " . $strCampos;
 
 		return $strUpdate;
 	}
