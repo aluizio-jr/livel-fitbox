@@ -5,7 +5,9 @@
             if (!$dataVenda) $dataVenda = date('Y-m-d');
             
             $itens_count = count($vendaItens);
+            
             for ($i=0; $i<$itens_count; $i++) {
+                $itemID = 0;
 
                 $planoVigenciaId = $vendaItens[$i]['id_plano_vigencia'];
                 $turmaLiveId = $vendaItens[$i]['id_live_turma'];
@@ -100,8 +102,8 @@
                     $vendaValorFinal += $itemValorFinal;
 
                     $arrFilters = ['lo_id_venda' => $vendaId];
-                    $itemID = nextID('lo_venda_itens', 'lo_id_venda_item', $arrFilters);
-                    echo "Item " . $i . ": " . $itemID . "/n";
+                    $itemID++; // = nextID('lo_venda_itens', 'lo_id_venda_item', $arrFilters);
+
                     if (!$itemID) throw new Exception("Nao foi possivel gerar o ID do item.");
 
                     // $str_sql = " INSERT INTO lo_venda_itens (
