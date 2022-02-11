@@ -60,7 +60,7 @@
 			$str_campos .= ($str_campos ? ", " : "") . $campo;
 
 			$str_valores .= ($str_valores ? ", " : "");
-			$str_valores .= ($valor ? "'" . $valor . "'" : "NULL")
+			$str_valores .= ($valor ? "'" . $valor . "'" : "NULL");
 		}
 
 		$strInsert = "INSERT INTO " . $tabela . " (";
