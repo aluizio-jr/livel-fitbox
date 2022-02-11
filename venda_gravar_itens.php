@@ -35,8 +35,6 @@
                     $planoParcelas = $r['lo_plano_vigencia_parcelas'];
                 }
 
-                
-
                 $r = array();
 
                 $str_sql = 'SELECT
@@ -134,7 +132,7 @@
                         . str_replace(',', '.', $itemDescontoValor) . ","
                         . str_replace(',', '.', $itemValorFinal)
                         . ")";
-                        
+                        echo $str_sql;
                     mysqli_query($conn, $str_sql);
                     $result = mysqli_affected_rows($conn);
     
