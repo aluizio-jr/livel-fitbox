@@ -7,12 +7,13 @@
         try {
             $filters = ["c001_id_aluno_lo" => $idCliente];
     
-            $idClienteAsaas = queryBuscaValor(
+            $retClienteAsaas = queryBuscaValor(
                 'c001_alunos', 
                 'c001_id_asaas', 
                 $filters
             );
-
+            
+            $idClienteAsaas = $retClienteAsaas['retValor'];
             if ($idClienteAsaas) return ["idClienteAsaas" => $idClienteAsaas, "error" => false];
 
             $str_sql = "SELECT * FROM c001_alunos WHERE c001_id_aluno_lo = " . $idCliente;
