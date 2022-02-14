@@ -1,7 +1,6 @@
 <?php
     require_once "asaas_info.php";
 
-    
     function asaasCienteGravar($idCliente, $conn, $sandbox) {
         try {
             $filters = ["c001_id_aluno_lo" => $idCliente];
@@ -18,6 +17,7 @@
 
             $rs_cliente = mysqli_query($conn, $str_sql);	   
             $num_cliente = mysqli_num_rows($rs_cliente);  
+            if (!$num_cliente > 0) throw new Exception("Nao foi possivel encontrar o cliente: ASAAS_NO_LOCAL"); 
 
             while($r = mysqli_fetch_assoc($rs_cliente)) {
                 $clienteNome =  $r['c001_nome_completo'] ?: false;
