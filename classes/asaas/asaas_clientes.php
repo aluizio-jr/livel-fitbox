@@ -97,7 +97,7 @@
             $idClienteAsaas = $retCliente['ALUNO_CADASTRO']['id'];
             
             $arrCampos = [
-                "c001_id_asaas" => $parcelidClienteAsaasamentoID
+                "c001_id_asaas" => $idClienteAsaas
             ];
             
             $arrWhere = [
