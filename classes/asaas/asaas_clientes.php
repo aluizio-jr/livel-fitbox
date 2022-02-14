@@ -65,9 +65,9 @@
         
             $response = curl_exec($ch);
             curl_close($ch);
-            echo $response;
+            $response = utf8_encode($response);
             $retCliente = json_decode($response, true);
-
+            
             switch (json_last_error()) {
                 case JSON_ERROR_NONE:
                     echo ' - No errors';
@@ -91,7 +91,7 @@
                     echo ' - Unknown error';
                 break;
             }
-            
+
             var_dump($retCliente);
             //if (!is_array($retCliente)) throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_RET"); 
             if (!$retCliente['ALUNO_CADASTRO']['id'])  throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_ID"); 
