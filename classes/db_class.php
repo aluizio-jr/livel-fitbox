@@ -22,6 +22,28 @@
 
 	}
 
+	function bdConnectErp() {
+
+        $host="fitgroup.com.br";
+        $user="fitgroup_erp";
+        $pass="dhvtnc0809vps";
+        $bd="fitgroup_erp";
+
+        $cnn = mysqli_connect ($host, $user, $pass, $bd);
+
+        if ($cnn) {
+            $result = $cnn;
+            $ret = mysqli_set_charset($cnn, "utf8");
+            
+        } else {
+            $result = false; //array('cnn'=>false, 'erro_msg'=>mysqli_connect_error());
+
+        }
+
+        return $result;
+
+    }
+
 	function nextID($tabela, $campo, $arrFilters = []) {
 		$conn = bd_connect_livel();
 		if ($conn) {
@@ -72,7 +94,7 @@
 		return $strInsert;
 	}
 
-	function queryUpdate($tabela, $camposValores) {
+	function queryUpdate($tabela, $camposValores, $campoWhere) {
 	
 		foreach ($camposValores as $campo => $valor) {
 			$strCampos .= ($strCampos ? ", " : "");
@@ -80,6 +102,7 @@
 		}
 
 		$strUpdate = "UPDATE " . $tabela . " SET " . $strCampos;
+		$strUpdate .= " WHERE " . $campoWhere['campo_nome'] . " = '" . $campoWhere['campo_valor'] . "'";
 
 		return $strUpdate;
 	}

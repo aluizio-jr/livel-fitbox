@@ -2,6 +2,7 @@
     require_once "classes/db_class.php"; 
     require_once "classes/functions.php";
     require_once "classes/post_data.php";
+    require_once "venda_gravar_cliente.php";
     require_once "venda_gravar_valida.php";
     require_once "venda_gravar_main.php";
     require_once "venda_gravar_itens.php";
@@ -26,8 +27,13 @@
             mysqli_begin_transaction($conn);
             $beginTrans = true;
 
+//VALIDA O CLIENTE
+            $retCliente = vendaGravarCliente($vendaData['cliente'], $conn);
+            if (!$retCliente['idCliente']) throw new Exception($retCliente['error']);
+
 //GRAVA VENDA MAIN
-            $retVendaMain = vendaGravarMain($vendaData, $conn);
+            $idCliente = $retCliente['idCliente'];
+            $retVendaMain = vendaGravarMain($vendaData, $idCliente, $conn);
             if (!$retVendaMain['idVenda'])  throw new Exception($retVendaMain['error']);
             $vendaId = $retVendaMain['idVenda'];
             

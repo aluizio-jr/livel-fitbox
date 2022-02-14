@@ -4,12 +4,21 @@
     
     function validaVenda($vendaData) {
         $venda_count = count($vendaData);
-        if (!$venda_count) return ["validou"=>false, "error" => "Dados da venda nao informados."];
-        if (!$vendaData['id_cliente']) return ["validou"=>false, "error" => "Cliente nao informado."];
-        if (!$vendaData['id_venda_tipo']) return ["validou"=>false, "error" => "Tipo de venda nao informado."];
-        if ($vendaData['id_venda_tipo'] == 3 && !$vendaData['id_venda_renovacao']) return ["validou"=>false, "error" => "ID da venda renovada nao informado."];
+        if (!$venda_count) return ["validou" => false, "error" => "Dados da venda nao informados."];
+        
+        if (!$vendaData['cliente']['id_cliente'] && !count($vendaData['cliente']['dados_cliente']))
+            return ["validou" => false, "error" => "Cliente nao informado."];
+        
+        $clienteCheck = validaCliente($vendaData['cliente']);
+        if (!$clienteCheck['validou'])
+            return ["validou"=>false, "error" => $clienteCheck['error']];
 
-        return ["validou"=>true, "error" => ""];
+        if (!$vendaData['id_venda_tipo']) return ["validou"=>false, "error" => "Tipo de venda nao informado."];
+        
+        if ($vendaData['id_venda_tipo'] == 3 && !$vendaData['id_venda_renovacao']) 
+            return ["validou" => false, "error" => "ID da venda renovada nao informado."];
+
+        return ["validou" => true, "error" => ""];
     }
 
     function validaVendaItens($vendaItens) {
@@ -67,6 +76,20 @@
                 if (in_array($vendaParcelas[$i]['forma_pagamento'], $fpagList)) {
                     if (!$vendaParcelas[$i]['id_cc'] || !count(!$vendaParcelas[$i]['dados_cc'])) {
                         throw new Exception("(Parcela: " . $item . ") Cartao de credito nao informado.");
+                    }
+
+                    
+                    if ($vendaParcelas[$i]['id_cc']) {
+                        $filters = ["lo_id_aluno_cc" => $vendaParcelas[$i]['id_cc']];
+    
+                        $tokenCC = queryBuscaValor(
+                            'lo_aluno_cc', 
+                            'lo_cc_token', 
+                            $filters
+                        );
+                        
+                        if (!$tokenCC) throw new Exception("Token do cartao nao encontrado.");
+
                     }
 
                     if (!$vendaParcelas[$i]['id_cc']) {
