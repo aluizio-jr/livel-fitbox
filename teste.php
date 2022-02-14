@@ -13,6 +13,6 @@
   // print_r($arrJson);
 
   $conn = bd_connect_livel();
-  $retCliente = asaasCienteGravar('6', $conn, 1);
+  $retCliente = asaasCienteGravar('6', $conn, 0);
 
   echo json_encode($retCliente);
