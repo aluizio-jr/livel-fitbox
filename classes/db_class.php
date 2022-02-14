@@ -133,7 +133,7 @@
 				$retRs = $r[0];
 			}                         
 
-			return ["retFn" => true, "retValor" => $retRs, "error" => false];
+			return ["retFn" => true, "retValor" => $retRs, "error" => $str_sql];
 
 		} catch(Exception $e) {
 			return ["retFn" => false, "retValor" => false, "error" => $e->getMessage()];

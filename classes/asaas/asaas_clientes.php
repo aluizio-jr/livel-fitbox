@@ -13,7 +13,7 @@
                 $filters
             );
 print_r($retClienteAsaas);
-
+            exit;
             $idClienteAsaas = $retClienteAsaas['retValor'];
             if ($idClienteAsaas) return ["idClienteAsaas" => $idClienteAsaas, "error" => false];
 
