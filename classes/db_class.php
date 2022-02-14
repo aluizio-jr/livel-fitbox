@@ -130,7 +130,7 @@
 			// if (!$num_rs > 0) throw new Exception('Query: ' . $str_sql);
 
 			while($r = mysqli_fetch_assoc($rs)) {
-				$retRs = $r[0];
+				$retRs = $r[$campoRet];
 			}                         
 
 			return ["retFn" => true, "retValor" => $retRs, "error" => $str_sql];
