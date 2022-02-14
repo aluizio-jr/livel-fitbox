@@ -1,6 +1,6 @@
 <?php
-    require_once "../../functions.php";
-    require_once "../db_class.php";
+    require_once __DIR__."../functions.php";
+    require_once __DIR__."../db_class.php";
     require_once "asaas_info.php";
 
     function asaasCienteGravar($idCliente, $conn, $sandbox) {
