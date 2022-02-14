@@ -1,5 +1,5 @@
 <?php
-    require_once "../functions.php";
+    require_once "../../functions.php";
     require_once "../db_class.php";
     require_once "asaas_info.php";
 
