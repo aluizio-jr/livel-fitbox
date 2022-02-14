@@ -92,8 +92,6 @@
                 break;
             }
 
-            var_dump($retCliente);
-            //if (!is_array($retCliente)) throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_RET"); 
             if (!$retCliente['ALUNO_CADASTRO']['id'])  throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_ID"); 
 
             $idClienteAsaas = $retCliente['ALUNO_CADASTRO']['id'];
@@ -109,8 +107,8 @@
 
             $str_sql = queryUpdate('c001_alunos', $arrCampo, $arrWhere);
             mysqli_query($conn, $str_sql);
-
-            return ["idClienteAsaas" => $idClienteAsaas, "error" => false];
+echo $str_sql;
+            return ["idClienteAsaas" => $idClienteAsaas, "error" => mysqli_error($conn)];
 
         } catch(Exception $e) {
             return ["idClienteAsaas" => false, "error" => $e->getMessage()];
