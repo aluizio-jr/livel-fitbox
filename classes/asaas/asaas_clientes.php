@@ -12,7 +12,7 @@
                 'c001_id_asaas', 
                 $filters
             );
-            
+
             $idClienteAsaas = $retClienteAsaas['retValor'];
             if ($idClienteAsaas) return ["idClienteAsaas" => $idClienteAsaas, "error" => false];
 
@@ -68,7 +68,7 @@
             
             $retCliente = json_decode($response, true);
             
-            if (!is_array($retCliente)) throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_RET"); 
+            if (!is_array($retCliente)) throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_RET: " . $response); 
             if (!$retCliente['ALUNO_CADASTRO']['id'])  throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_ID"); 
 
             $idClienteAsaas = $retCliente['ALUNO_CADASTRO']['id'];
