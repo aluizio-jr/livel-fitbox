@@ -66,7 +66,7 @@
             $response = curl_exec($ch);
             curl_close($ch);
             echo $response;
-            $retCliente = json_decode($response);
+            $retCliente = json_decode($response, true);
             var_dump($retCliente);
             //if (!is_array($retCliente)) throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_RET"); 
             if (!$retCliente['ALUNO_CADASTRO']['id'])  throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_ID"); 
