@@ -67,30 +67,6 @@
             curl_close($ch);
             $response = utf8_encode($response);
             $retCliente = json_decode($response, true);
-            
-            switch (json_last_error()) {
-                case JSON_ERROR_NONE:
-                    echo ' - No errors';
-                break;
-                case JSON_ERROR_DEPTH:
-                    echo ' - Maximum stack depth exceeded';
-                break;
-                case JSON_ERROR_STATE_MISMATCH:
-                    echo ' - Underflow or the modes mismatch';
-                break;
-                case JSON_ERROR_CTRL_CHAR:
-                    echo ' - Unexpected control character found';
-                break;
-                case JSON_ERROR_SYNTAX:
-                    echo ' - Syntax error, malformed JSON';
-                break;
-                case JSON_ERROR_UTF8:
-                    echo ' - Malformed UTF-8 characters, possibly incorrectly encoded';
-                break;
-                default:
-                    echo ' - Unknown error';
-                break;
-            }
 
             if (!$retCliente['ALUNO_CADASTRO']['id'])  throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_ID"); 
 
@@ -105,9 +81,9 @@
                 'campo_valor' => $idCliente
             ];
 
-            $str_sql = queryUpdate('c001_alunos', $arrCampo, $arrWhere);
+            $str_sql = queryUpdate('c001_alunos', $arrCampos, $arrWhere);
             mysqli_query($conn, $str_sql);
-echo $str_sql;
+
             return ["idClienteAsaas" => $idClienteAsaas, "error" => mysqli_error($conn)];
 
         } catch(Exception $e) {
