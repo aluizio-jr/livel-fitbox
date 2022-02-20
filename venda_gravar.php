@@ -2,10 +2,12 @@
     require_once "classes/db_class.php"; 
     require_once "classes/functions.php";
     require_once "classes/post_data.php";
+    require_once "classes/asaas/asaas_clientes.php";
     require_once "venda_gravar_cliente.php";
     require_once "venda_gravar_valida.php";
     require_once "venda_gravar_main.php";
     require_once "venda_gravar_itens.php";
+    
 
     function gravarVenda($vendaData) {
         try {
@@ -35,13 +37,14 @@
             $idCliente = $retCliente['idCliente'];
             $retVendaMain = vendaGravarMain($vendaData, $idCliente, $conn);
             if (!$retVendaMain['idVenda'])  throw new Exception($retVendaMain['error']);
-            $vendaId = $retVendaMain['idVenda'];
+            $idVenda = $retVendaMain['idVenda'];
             
 //GRAVA VENDA ITENS
             $retVendaItens = vendaGravarItens($vendaId, $vendaData['itens'], $conn);
             if (!$retVendaItens['vendaItens'])  throw new Exception($retVendaItens['error']);
 
 //GRAVA VENDA PARCELAS
+            $retVendaParcelas = vendaGravarParcelas($idCliente, $idVenda, $vendaData['parcelas'], $conn);
 
             mysqli_commit($conn);
             return ["validou" => true, "error" => false];

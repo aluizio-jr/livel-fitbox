@@ -7,21 +7,33 @@
             $totalParcelas = 0;
 
             $parcelasCount = count($vendaParcelas);
+            $processarAsaas = array();
+            $parcelasGravou = 0;
+
             for ($i = 0; $i < $parcelasCount; $i++) {
 
                 $formaPagto = $vendaParcelas[$i]['forma_pagamento'];
                 $vencimento = $vendaParcelas[$i]['vencimento'];
-                $valorTotalParcelas = $vendaParcelas[$i]['parcelas'];
+                $valorTotalParcelas = $vendaParcelas[$i]['valor'];
                 $numParcelas = $vendaParcelas[$i]['parcelas'];
                 $valorParcela = $valorTotalParcelas > 0 ? ($valorTotalParcelas / $numParcelas) : 0;
                 $dataPagamento = $vendaParcelas[$i]['data_pagamento'] ?: null;
                 
-                $processarCartao = ($formaPagto == 4 || ($formaPagto == 20 && DateDifDays($vencimento) <=0));
+                $processarCartao = (($formaPagto == 4 || $formaPagto == 20) && DateDifDays($vencimento) <=0);
                 $processarBoleto = ($formaPagto == 21);
                 $processarLink = ($formaPagto == 22);
+                $isParcelamento = ($numParcelas > 1 && ($formaPagto == 4 || $formaPagto == 21));
 
                 $parcelamentoID = null;
-                $isParcelamento = ($numParcelas > 1 && ($formaPagto == 4 || $formaPagto == 21));
+                $linkParcelas = null;
+                // $boletoTransacaoId = mull;
+                // $linkTransacaoId = null;
+                
+                if ($processarLink) {
+                    $linkParcelas = $numParcelas;
+                    $numParcelas = 1;
+                    $valorParcela = $valorTotalParcelas;
+                }
 
                 if ($isParcelamento) {
                     $parcelamentoID = nextID('h009y_parcelamentos', 'h009y_id_parcelamento');
@@ -43,7 +55,7 @@
                     }
                 }
 
-                for ($z = 0; $z < $parcelasCount; $z++) {
+                for ($z = 0; $z < $numParcelas; $z++) {
                     $parcelaNum++;
                     $transacaoID = nextID('lo_transacoes', 'lo_id_transacao');
                     if (!$transacaoID) throw new Exception("Nao foi possivel gerar o ID da transacao (BD).");
@@ -69,41 +81,89 @@
     
                     if ($result <= 0) throw new Exception("Nao foi possivel gravar a venda (parcela " . $i . "): " . mysqli_error($conn)); 
                     
-                    if ($processarCartao && !$isParcelamento && !$cartaoTransacaoId) 
-                        $cartaoTransacaoId = $transacaoID;
+                    // if ($processarCartao && !$isParcelamento && !$cartaoTransacaoId) {
+                    //     $cartaoTransacaoId = $transacaoID;
+
+                    // } else if ($processarBoleto && !$isParcelamento) {
+                    //     $boletoTransacaoId = $transacaoID;
+
+                    // } else if ($processarLink && !$isParcelamento) {
+                    //     $linkTransacaoId = $transacaoID;
+                    // }
                 }
-                
+
                 if ($processarCartao) {
-                    if ($isParcelamento) {
-                        if (!$parcelamentoID)  throw new Exception("ID do parcelamento nao encontrado para transacao (parcela " . $i . ")."); 
-                        
-                        $retAsaasCobranca = asaasCobrancaCartao (
-                            $clienetId, 
-                            false, 
-                            $parcelamentoID, 
-                            $vendaParcelas[$i]['id_cc'], 
-                            $vendaParcelas[$i]['dados_cc']
-                        );
+                    $processarAsaas[$i] = [
+                        'formaPagto' => $formaPagto,
+                        'idTransacao' => $transacaoID,
+                        'idParcelamento' => null,
+                        'numParcelas' => 1,
+                        'valorParcela' => $valorParcela,
+                        'idCliente' => $clienetId,
+                        'idVenda' => $vendaId,
+                        'idCartao'=> $vendaParcelas[$i]['id_cc'], 
+                        'dadosCartao' => $vendaParcelas[$i]['dados_cc']
+                    ];
+                    
+                } else if ($isParcelamento && $parcelamentoID) {
+                    $processarAsaas[$i] = [
+                        'formaPagto' => $formaPagto,
+                        'idTransacao' => null,
+                        'idParcelamento' => $parcelamentoID,
+                        'numParcelas' => $numParcelas,
+                        'valorParcela' => $valorTotalParcelas,
+                        'idCliente' => $clienetId,
+                        'idVenda' => $vendaId,
+                        'idCartao'=> $vendaParcelas[$i]['id_cc'], 
+                        'dadosCartao' => $vendaParcelas[$i]['dados_cc']
+                    ];          
 
-                    } else if ($cartaoTransacaoId) {
-                        $retAsaasCobranca = asaasCobrancaCartao (
-                            $clienetId, 
-                            $cartaoTransacaoId, 
-                            false, 
-                            $vendaParcelas[$i]['id_cc'], 
-                            $vendaParcelas[$i]['dados_cc']
-                        );
-                        
-                    } else {
-                        throw new Exception("ID do parcelamento ou parcela nao encontradso para transacao (parcela " . $i . ")."); 
-                    }
-
+                } else if ($processarBoleto) {
+                    $processarAsaas[$i] = [
+                        'formaPagto' => $formaPagto,
+                        'idTransacao' => $transacaoID,
+                        'idParcelamento' => null,
+                        'numParcelas' => 1,
+                        'valorParcela' => $valorParcela,
+                        'idCliente' => $clienetId,
+                        'idVenda' => $vendaId,
+                        'idCartao'=> null, 
+                        'dadosCartao' => null
+                    ];  
+                
+                } else if ($processarLink && $linkParcelas) {
+                    $processarAsaas[$i] = [
+                        'formaPagto' => $formaPagto,
+                        'idTransacao' => $transacaoID,
+                        'idParcelamento' => null,
+                        'numParcelas' => $linkParcelas,
+                        'valorParcela' => $valorTotalParcelas,
+                        'idCliente' => $clienetId,
+                        'idVenda' => $vendaId,
+                        'idCartao'=> null, 
+                        'dadosCartao' => null
+                    ]; 
                 }
                 
+                $parcelasGravou++;
                 
             }
 
-            return ["vendaParcelas" => $totalParcelas, "error" => false];
+            foreach ($processarAsaas as $row)
+            {
+                foreach($row as $key => $valor)
+                {
+                    echo '<div>'. $i." ".$a .'</div>';
+                }
+            }
+            // $retAsaasCobranca = asaasCobrancaCartao (
+            //     $clienetId, 
+            //     false, 
+            //     $parcelamentoID, 
+            //     $vendaParcelas[$i]['id_cc'], 
+            //     $vendaParcelas[$i]['dados_cc']
+            // );
+            return ["vendaParcelas" => $parcelasGravou, "error" => false];
 
         } catch(Exception $e) {
             return ["vendaParcelas" => false, "error" => $e->getMessage()];

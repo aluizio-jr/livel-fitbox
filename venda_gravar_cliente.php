@@ -1,16 +1,18 @@
 <?php
+require_once "classes/asaas/asaas_clientes.php";
 
 function validaCliente($vendaCliente) {
     if ($vendaData['id_cliente']) {
         $filters = ["c001_id_aluno_lo" => $vendaData['id_cliente']];
     
-        $clienteId = queryBuscaValor(
+        $retCliente = queryBuscaValor(
             'c001_alunos', 
             'c001_id_aluno_lo', 
             $filters
         );
 
-        return ["validou" => $clienteId ?: false, "error" => $clienteId ? false : "ID do cliente nao encontrado."];
+        $idCliente = $retCliente['retValor'];
+        if ($idCliente) return ["validou" => true, "error" => false];
     }
 
     if (!count($vendaData['dados_cliente']))
@@ -61,7 +63,11 @@ function validaCliente($vendaCliente) {
 
             if ($result <= 0) throw new Exception("Nao foi possivel gravar o novo cliente (DB): " . mysqli_error($conn)); 
             
-            
+            $retCliente = asaasCienteGravar($clienteID, $conn, 0);
+            if (!$retCliente['idCliente']) throw new Exception("Nao foi possivel gravar o novo cliente (ASAAS): " . $retCliente['error']);
+
+            return ["idCliente" => $clienteID, "error" => false];
+
         } catch(Exception $e) {
             return ["idCliente" => false, "error" => $e->getMessage()];
             
