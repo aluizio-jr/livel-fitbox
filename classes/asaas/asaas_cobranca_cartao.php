@@ -6,7 +6,8 @@
             $idVenda = $dadosCobranca['idVenda'];
             $formaPagto = $dadosCobranca['formaPagto'];
             $idTransacao = $dadosCobranca['idTransacao'] ?: false;
-            $idParcelamento = $dadosCobranca['idParcelamento'] ?: false;        
+            $idParcelamento = $dadosCobranca['idParcelamento'] ?: false;    
+            $arrTransacoes = $dadosCobranca['arrTransacoes'];
             $numParcelas = $dadosCobranca['numParcelas'];
             $valorParcela = $dadosCobranca['valorParcela'];
             $idCartao  = $dadosCobranca['idCartao'] ?: false;
@@ -71,10 +72,10 @@
                         $cc_celular = $dadosCartao['c001_celular'] ?: $defaultCelular;                        
                     }  
                 }
-            }
-
-//DADOS CARTAO ENVIADOS
-            if ($dadosCartao) {
+            
+                
+        //DADOS CARTAO ENVIADOS
+            } else if ($dadosCartao) {
                 $cc_titular = $dadosCartao['titular_nome'];
                 $cc_numero = $dadosCartao['cc_numero'];
                 $cc_validade_mes = $dadosCartao['cc_validade_mes'];
@@ -139,17 +140,20 @@
 
             $response = curl_exec($ch);
                 
-            if(curl_error($ch))  throw new Exception('Request Error: ' . curl_error($ch));
+            if(curl_error($ch)) throw new Exception('Request Error: ' . curl_error($ch));
 
             curl_close($ch);
 
             $response = utf8_encode($response);
-            $retCliente = json_decode($response, true);
+            $retCobrancaCartao = json_decode($response, true);
             
-            return ["validou" => true, "error" => $e->getMessage()];
+            $cartaoRetorno = asaasCobrancaRetorno($retCobrancaCartao, $dadosCobranca, $conn);
+            if (!$cartaoRetorno['retCobrancaRetorno']) throw new Exception($cartaoRetorno['error']);
+            
+            return ["aprovada" => true, "error" => false];
 
         } catch(Exception $e) {
-            return ["validou" => false, "error" => $e->getMessage()];
+            return ["aprovada" => false, "error" => $e->getMessage()];
             
         }
     }

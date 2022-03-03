@@ -45,6 +45,7 @@
 
 //GRAVA VENDA PARCELAS
             $retVendaParcelas = vendaGravarParcelas($idCliente, $idVenda, $vendaData['parcelas'], $conn);
+            if (!$retVendaParcelas['vendaParcelas']) throw new Exception($retVendaParcelas['error']);
 
             mysqli_commit($conn);
             return ["validou" => true, "error" => false];

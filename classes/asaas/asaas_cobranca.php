@@ -4,6 +4,9 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/livel_fitbox/classes/crypt.php";
     require_once "asaas_clientes.php";
     require_once "asaas_cobranca_valida.php";
+    require_once "asaas_cobranca_cartao.php";
+    require_once "asaas_cobranca_boleto.php";
+    require_once "asaas_cobranca_link.php";
     
     function asaasCobranca ($dadosCobranca, $conn = false) {
 
@@ -13,18 +16,33 @@
                 if (!$conn) throw new Exception("Nao foi possivel conectar ao banco de dados.");
             }
 
-            $retValidaCobranca = asaasCobrancaVaida($dadosCobranca, $conn);
-
-            if (!$retValidaCobranca['validou']) throw new Exception($retValidaCobranca['error']);
+            // $retValidaCobranca = asaasCobrancaVaida($dadosCobranca, $conn);
+            // if (!$retValidaCobranca['validou']) throw new Exception($retValidaCobranca['error']);
 
             $formaPagto = $dadosCobranca['formaPagto'];
 
             if ($formaPagto == 4 || $formaPagto == 20) {
-                $retCobranca = asaasCobrancaCartao($dadosCobranca, $conn);
+                $retCartao = asaasCobrancaCartao($dadosCobranca, $conn);
+                if (!$retCartao['aprovada']) throw new Exception($retCobranca['error']);
+
             }
 
+            if ($formaPagto == 21) {
+                $retBoleto = asaasCobrancaBoleto($dadosCobranca, $conn);
+                if (!$retBoleto['processada']) throw new Exception($retCobranca['error']);
+
+            }
+
+            if ($formaPagto == 22) {
+                $retLinkPagto = asaasCobrancaLinkPagamento($dadosCobranca, $conn);
+                if (!count($retLinkPagto['linksGerados'])) throw new Exception('Nenhum link de pagamento gerado. ' . $retLinkPagto['error']);
+
+            }
+
+            return ["cobrancaAsaas" => true, "error" => false];
+
         } catch(Exception $e) {
-            return ["cobrancaCartao" => false, "error" => $e->getMessage()];
+            return ["cobrancaAsaas" => false, "error" => $e->getMessage()];
             
         }
     }

@@ -101,7 +101,7 @@
                     }     
                 }
 
-                $fpagList = [1, 5, 14, 18];
+                $fpagList = [1, 14, 18];
                 if (in_array($vendaParcelas[$i]['forma_pagamento'], $fpagList)) {
                     if (!$vendaParcelas[$i]['data_pagamento']) {
                         throw new Exception("(Parcela: " . $item . ") Data de pagamento nao informada.");

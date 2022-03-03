@@ -106,35 +106,6 @@
 
                     if (!$itemID) throw new Exception("Nao foi possivel gerar o ID do item.");
 
-                    // $str_sql = " INSERT INTO lo_venda_itens (
-                    //     lo_id_venda,
-                    //     lo_id_venda_item,
-                    //     lo_id_produto_valor,
-                    //     lo_id_produto_categoria,
-                    //     lo_id_plano_vigencia,
-                    //     lo_id_live_turma,
-                    //     lo_item_vigencia_inicio,
-                    //     lo_item_vigencia_fim,
-                    //     lo_item_quantidade,
-                    //     lo_item_valor,
-                    //     lo_id_cupom,
-                    //     lo_item_valor_desconto,
-                    //     lo_item_valor_final
-                    //     ) VALUES ("
-                    //     . $vendaId . ","
-                    //     . $itemID . ",";
-                    //     $str_sql .= $idProdutoValor ?: "NULL" . ",";
-                    //     $str_sql .= $idProdutoCategoria ?: "NULL" . ",";
-                    //     $str_sql .=  $planoVigenciaId . ",";
-                    //     $str_sql .= $turmaLiveId ?: "NULL" . ",";
-                    //     $str_sql .= $itemVigenciaInicial ? "'" . $itemVigenciaInicial . "'" : "NULL" . ",";
-                    //     $str_sql .= $itemVigenciaFinal ? "'" . $itemVigenciaFinal . "'" : "NULL" . ",";
-                    //     $str_sql .= $itemQuantidade ?: "NULL" . ",";
-                    //     $str_sql .= str_replace(',', '.', $itemValor) . ",";
-                    //     $str_sql .= $descontoCupom ? "'" . $descontoCupom . "'" : "NULL" . ",";
-                    //     $str_sql .=  str_replace(',', '.', $itemDescontoValor) . ","
-                    //     . str_replace(',', '.', $itemValorFinal)
-                    //     . ")";
                     $arrCampos = [
                         "lo_id_venda" =>  $vendaId,
                         "lo_id_venda_item" => $itemID,
