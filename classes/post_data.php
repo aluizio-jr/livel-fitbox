@@ -16,5 +16,5 @@ function getPost()
         return $post;
     }
 
-    return [];
+    //return [];
 }
