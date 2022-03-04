@@ -183,7 +183,7 @@
             $arr_result = array('LIVE_HORARIOS'=>ContentLivesHorarios($id_aluno, $turma_id));
             
             break;   
-               
+
 
         case "ConteudosList":
 

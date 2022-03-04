@@ -7,6 +7,7 @@
     require_once "venda_gravar_valida.php";
     require_once "venda_gravar_main.php";
     require_once "venda_gravar_itens.php";
+    require_once "venda_gravar_parcelas.php";
     
 
     function gravarVenda($vendaData) {
@@ -48,13 +49,15 @@
             if (!$retVendaParcelas['vendaParcelas']) throw new Exception($retVendaParcelas['error']);
 
             mysqli_commit($conn);
+
+            http_response_code(200);
             return ["validou" => true, "error" => false];
 
         } catch(Exception $e) {
             if ($beginTrans) mysqli_rollback($conn);
 
             http_response_code(400);
-            return ["error" => $e->getMessage()];
+            return ["validou" => false, "error" => $e->getMessage()];
         }
     }
 
