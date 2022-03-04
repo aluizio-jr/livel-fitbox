@@ -62,8 +62,31 @@
     }
     $vendaPost = file_get_contents('php://input');
     $vendaPost = json_decode($vendaPost, true); //getPost();
-    echo 'Erro Json: ' . json_last_error();
-    
+    switch (json_last_error()) {
+        case JSON_ERROR_NONE:
+            echo 'No errors';
+            break;
+        case JSON_ERROR_DEPTH:
+            echo 'Maximum stack depth exceeded';
+            break;
+        case JSON_ERROR_STATE_MISMATCH:
+            echo 'Underflow or the modes mismatch';
+            break;
+        case JSON_ERROR_CTRL_CHAR:
+            echo 'Unexpected control character found';
+            break;
+        case JSON_ERROR_SYNTAX:
+            echo 'Syntax error, malformed JSON';
+            break;
+        case JSON_ERROR_UTF8:
+            echo 'Malformed UTF-8 characters, possibly incorrectly encoded';
+            break;
+        default:
+            echo 'Unknown error';
+            break;
+    }    
+
+
     $retVenda = gravarVenda($vendaPost);
     echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
 
