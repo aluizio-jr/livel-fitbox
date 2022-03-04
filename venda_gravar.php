@@ -64,7 +64,7 @@
     $vendaPost = utf8_decode($vendaPost);
     $vendaPost = json_decode($vendaPost, true); //getPost();
 
-    print_r($vendaPost['cliente']);
+    echo ('ID cliente: ' . $vendaPost['cliente']['id_cliente'] . ' - Dados cli: ' . count($vendaPost['cliente']['dados_cliente']));
 
     // $retVenda = gravarVenda($vendaPost);
     // echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
