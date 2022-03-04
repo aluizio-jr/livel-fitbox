@@ -3,7 +3,7 @@
     require_once "classes/functions.php";
     
     function validaVenda($vendaData) {
-        $venda_count = count($vendaData);
+        $venda_count = is_array($vendaData);
         if (!$venda_count) return ["validou" => false, "error" => "Dados da venda nao informados."];
         
         if (!$vendaData['cliente']['id_cliente'] && !count($vendaData['cliente']['dados_cliente']))
