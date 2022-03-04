@@ -6,8 +6,9 @@
         $venda_count = is_array($vendaData);
         if (!$venda_count) return ["validou" => false, "error" => "Dados da venda nao informados."];
         
-        return ['idCliente' => $vendaPost['cliente']['id_cliente'],
-                'dadosClienteCount' => count($vendaPost['cliente']['dados_cliente'])
+        return ['validou' => false, 
+                'error' => 'idCliente: ' . $vendaPost['cliente']['id_cliente'] . 
+                ' - dadosClienteCount: ' . count($vendaPost['cliente']['dados_cliente'])
         ];
 
         if (!$vendaData['cliente']['id_cliente'] && !count($vendaData['cliente']['dados_cliente'])) {
