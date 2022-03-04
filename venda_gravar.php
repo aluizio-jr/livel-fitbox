@@ -60,11 +60,13 @@
             return ["validou" => false, "error" => $e->getMessage()];
         }
     }
-
-    $vendaPost = json_decode(file_get_contents('php://input'), true); //getPost();
+    $vendaPost = file_get_contents('php://input');
     print_r($vendaPost);
-    $retVenda = gravarVenda($vendaPost);
-    echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
+    echo($vendaPost);
+    //$vendaPost = json_decode(file_get_contents('php://input'), true); //getPost();
+
+    // $retVenda = gravarVenda($vendaPost);
+    // echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
 
     
 
