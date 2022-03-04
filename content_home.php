@@ -117,7 +117,7 @@
                     ELSE NULL 
                 END) AS LiveImagem,
 
-                lo_lives_horarios.lo_live_dia_semana AS LiveDiaSemana,";
+                (lo_lives_horarios.lo_live_dia_semana - 1) AS LiveDiaSemana,";
 
                 $str_sql .= "
                     (CASE lo_live_dia_semana
