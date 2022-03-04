@@ -1,5 +1,5 @@
 <?php
-    require_once "classes/asaas/asaas_cobranca_cartao.php"
+    require_once "classes/asaas/asaas_cobranca_cartao.php";
 
     function vendaGravarParcelas($clienetId, $vendaId, $vendaParcelas, $conn, $dataVenda = false) {
         try {
