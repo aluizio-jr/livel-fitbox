@@ -61,7 +61,7 @@
         }
     }
 
-    $vendaPost = getPost();
+    $vendaPost = json_decode(file_get_contents('php://input'), true); //getPost();
     print_r($vendaPost);
     $retVenda = gravarVenda($vendaPost);
     echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
