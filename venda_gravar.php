@@ -61,7 +61,7 @@
         }
     }
     $vendaPost = file_get_contents('php://input');
-    $vendaPost = json_decode($vendaPost, true); //getPost();
+    $vendaPost = utf8_decode(json_decode($vendaPost, true)); //getPost();
     switch (json_last_error()) {
         case JSON_ERROR_NONE:
             echo 'No errors';
