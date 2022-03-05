@@ -111,7 +111,8 @@
                 $retAsaas = ['data'=> $retornoAsaas];
             }
 
-            $lastIdx = count($retAsaas['data'])--;
+            $lastIdx = count($retAsaas['data']);
+            $lastIdx--;
             for ($i = $lastIdx; $i => 0; $i--) {
 
 //CRIA CONTA_MOV_ASAAS                
