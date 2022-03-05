@@ -1,6 +1,6 @@
 <?php
 
-function asaasCobrancaVaida($dadosCobranca, $conn) {
+function asaasCobrancaValida($dadosCobranca, $conn) {
 
     try {
         $idCliente = $dadosCobranca['idCliente'] ?: null;
