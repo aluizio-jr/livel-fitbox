@@ -9,8 +9,8 @@ function asaasCobrancaVaida($dadosCobranca, $conn) {
         $idParcelamento = $dadosCobranca['idParcelamento'] ?: null;        
         $numParcelas = $dadosCobranca['numParcelas'] ?: null;
         $valorParcela = $dadosCobranca['valorParcela'] ?: null;
-        $idCartao  = $dadosCobranca['idCartao'] ?: null;
-        $dadosCartao =  = $dadosCobranca['dadosCartao'] ?: null;
+        $idCartao = $dadosCobranca['idCartao'] ?: null;
+        $dadosCartao = $dadosCobranca['dadosCartao'] ?: null;
         
         if (!$idCliente)  throw new Exception('Cliente nao informado (COB)');
         
