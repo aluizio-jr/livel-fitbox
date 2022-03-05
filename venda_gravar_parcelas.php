@@ -1,5 +1,6 @@
 <?php
     require_once "classes/asaas/asaas_cobranca_cartao.php";
+    require_once "classes/asaas/asaas_cobranca_valida.php";
 
     function vendaGravarParcelas($clienetId, $vendaId, $vendaParcelas, $conn, $dataVenda = false) {
         try {
@@ -169,7 +170,7 @@
                     foreach ($arrTransacoes as $transacaoID) {
 
                         //GRAVA LOG DE FALHA
-                        $transacaoLogID = nextID('lo_transacoes_log', 'lo_id_log_transacao');
+                        $transacaoLogID = nextID('lo_transacoes_log', 'lo_id_log_transacao', false, $conn);
                         $arrCampos = [
                             "lo_id_log_transacao" =>  $transacaoLogID,
                             "lo_id_transacao" =>  $transacaoID,
