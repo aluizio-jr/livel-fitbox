@@ -121,7 +121,7 @@
 
                 $arrCampos = [
                     'h009h_id_asaas_movimento' =>  $idMovAsaas,
-                    'h009h_paymentId' => $retAsaas['data'][$i]['id'];,
+                    'h009h_paymentId' => $retAsaas['data'][$i]['id'],
                     'cs009q_id_cobranca_status' => $cobrancaStatusID,
                     'h009h_recibo_link' => $retAsaas['data'][$i]['transactionReceiptUrl'],
                     'h009h_conciliado' => '0'                    
