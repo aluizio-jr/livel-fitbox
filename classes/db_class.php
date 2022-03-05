@@ -44,8 +44,8 @@
 
     }
 
-	function nextID($tabela, $campo, $arrFilters = []) {
-		$conn = bd_connect_livel();
+	function nextID($tabela, $campo, $arrFilters = [], $conn = false) {
+		if (!$conn) $conn = bd_connect_livel();
 		if ($conn) {
 			$str_sql = "SELECT MAX(" . $campo . ") AS last_id FROM " . $tabela;
 
