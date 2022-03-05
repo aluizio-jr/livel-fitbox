@@ -166,6 +166,24 @@
   
             foreach ($processarAsaas as $dadosCobranca) {
                 $retAsaas = asaasCobranca($dadosCobranca, $conn);
+                
+                foreach ($arrTransacoes as $transacaoID) {
+                    $transacaoLogID = nextID('lo_transacoes_log', 'lo_id_log_transacao', false, $conn);
+
+                    $arrCampos = [
+                        "lo_id_log_transacao" =>  $transacaoLogID,
+                        "lo_id_transacao" =>  $transacaoID,
+                        "cs009f_id_forma_pagamento" =>  $dadosCobranca['formaPagto'],
+                        "lo_log_data_horario" => date('Y-m-d') . ' ' . date('H:i:s'),
+                        "lo_log_descricao" => $retAsaas['error'],
+                        "lo_log_retorno" =>  $retAsaas['retornoAsaas']
+                    ];
+                    
+                    $str_sql = queryInsert("lo_transacoes_log", $arrCampos);
+                    
+                    mysqli_query($conn, $str_sql);
+                    $result = mysqli_affected_rows($conn);
+                }
 
                 if (!$retAsaas['cobrancaAsaas']) {
                     foreach ($arrTransacoes as $transacaoID) {
@@ -178,7 +196,7 @@
                             "cs009f_id_forma_pagamento" =>  $dadosCobranca['formaPagto'],
                             "lo_log_data_horario" => date('Y-m-d') . ' ' . date('H:i:s'),
                             "lo_log_descricao" => $retAsaas['error'],
-                            "lo_log_retorno" => $transacaoVencimento
+                            "lo_log_retorno" =>  $retAsaas['retornoAsaas']
                         ];
                         
                         $str_sql = queryInsert("lo_transacoes_log", $arrCampos);

@@ -3,6 +3,8 @@
     
     function asaasCobrancaCartao($dadosCobranca, $conn) {
         try {
+            $response = '';
+            
             $idCliente = $dadosCobranca['idCliente'];
             $idVenda = $dadosCobranca['idVenda'];
             $formaPagto = $dadosCobranca['formaPagto'];
@@ -151,10 +153,10 @@
             $cartaoRetorno = asaasCobrancaRetorno($retCobrancaCartao, $dadosCobranca, $conn);
             if (!$cartaoRetorno['retCobrancaRetorno']) throw new Exception($cartaoRetorno['error']);
             
-            return ["aprovada" => true, "error" => false];
+            return ['aprovada' => true, 'retornoAsaas' => $response, 'error' => false];
 
         } catch(Exception $e) {
-            return ["aprovada" => false, "error" => $e->getMessage()];
+            return ['aprovada' => false, 'retornoAsaas' => $response, 'error' => $e->getMessage()];
             
         }
     }

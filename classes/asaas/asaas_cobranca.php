@@ -20,9 +20,12 @@
             // if (!$retValidaCobranca['validou']) throw new Exception($retValidaCobranca['error']);
 
             $formaPagto = $dadosCobranca['formaPagto'];
+            $retornoAsaas = '';
 
             if ($formaPagto == 4 || $formaPagto == 20) {
                 $retCartao = asaasCobrancaCartao($dadosCobranca, $conn);
+                $retornoAsaas = $retCartao['retornoAsaas'];
+
                 if (!$retCartao['aprovada']) throw new Exception($retCobranca['error']);
 
             }
@@ -39,10 +42,10 @@
 
             }
 
-            return ["cobrancaAsaas" => true, "error" => false];
+            return ['cobrancaAsaas' => true, 'retornoAsaas' => $retornoAsaas, 'error' => false];
 
         } catch(Exception $e) {
-            return ["cobrancaAsaas" => false, "error" => $e->getMessage()];
+            return ['cobrancaAsaas' => false, 'retornoAsaas' => $retornoAsaas, 'error' => $e->getMessage()];
             
         }
     }
