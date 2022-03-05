@@ -21,7 +21,7 @@
             );
             $idClienteAsaas = $retClienteAsaas['retValor'];
 
-            $arrParam = array [
+            $arrParam = array (
                 'Metodo' => 'CobrancaBoleto',
                 'ClienteID' => 1005,
                 'AlunoAsaasID' => $idClienteAsaas,
@@ -32,7 +32,7 @@
                 'Descricao' => 'Livel Fitbox',
                 'Reference' => $idVenda,
                 'Sandbox' => 1
-            ];
+            );
                 
             $urlParams = http_build_query($arrParam);
             $url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
