@@ -16,7 +16,7 @@
             $formaPagto = $dadosCobranca['formaPagto'];
             $idTransacao = $dadosCobranca['idTransacao'] ?: false;
             $idParcelamento = $dadosCobranca['idParcelamento'] ?: false;
-            $arrTransacoes = $dadosCobranca['arrTransacoes']  
+            $arrTransacoes = $dadosCobranca['arrTransacoes'];
             $numParcelas = $dadosCobranca['numParcelas'];
             $valorParcela = $dadosCobranca['valorParcela'];
             $idCartao  = $dadosCobranca['idCartao'] ?: false;
