@@ -113,7 +113,7 @@
 
             $lastIdx = count($retAsaas['data']);
             $lastIdx--;
-            for ($i = $lastIdx; $i => 0; $i--) {
+            for ($i=$lastIdx; $i=>0; $i--) {
 
 //CRIA CONTA_MOV_ASAAS                
                 $idMovAsaas = nextID('h009h_asaas_movimento', 'h009h_id_asaas_movimento');
