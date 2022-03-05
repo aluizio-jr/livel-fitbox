@@ -39,7 +39,7 @@
                 }
 
                 if ($isParcelamento) {
-                    $parcelamentoID = nextID('h009y_parcelamentos', 'h009y_id_parcelamento', $filter[], $conn);
+                    $parcelamentoID = nextID('h009y_parcelamentos', 'h009y_id_parcelamento', false, $conn);
                     $arrCampos = [
                         "h009y_id_parcelamento" => $parcelamentoID,
                         "h009y_data_transacao" => date('Y-m-d'),
