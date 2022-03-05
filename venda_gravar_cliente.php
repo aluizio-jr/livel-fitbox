@@ -2,8 +2,8 @@
 require_once "classes/asaas/asaas_clientes.php";
 
 function validaCliente($vendaCliente) {
-    if ($vendaData['id_cliente']) {
-        $filters = ["c001_id_aluno_lo" => $vendaData['id_cliente']];
+    if ($vendaCliente['id_cliente']) {
+        $filters = ["c001_id_aluno_lo" => $vendaCliente['id_cliente']];
     
         $retCliente = queryBuscaValor(
             'c001_alunos', 
@@ -15,19 +15,19 @@ function validaCliente($vendaCliente) {
         if ($idCliente) return ["validou" => true, "error" => false];
     }
 
-    if (!count($vendaData['dados_cliente']))
+    if (!count($vendaCliente['dados_cliente']))
         return ["validou" => false, "error" => "Dados do cliente nao informados."];
     
-    if (!$vendaData['dados_cliente']['nome_completo'])
+    if (!$vendaCliente['dados_cliente']['nome_completo'])
         return ["validou" => false, "error" => "Nome do cliente nao informado."];
 
-    if (!$vendaData['dados_cliente']['cpf'])
+    if (!$vendaCliente['dados_cliente']['cpf'])
         return ["validou" => false, "error" => "CPF do cliente nao informado."];
 
-    if (!$vendaData['dados_cliente']['email'])
+    if (!$vendaCliente['dados_cliente']['email'])
         return ["validou" => false, "error" => "E-mail do cliente nao informado."];
 
-    if (!$vendaData['dados_cliente']['celular'])
+    if (!$vendaCliente['dados_cliente']['celular'])
         return ["validou" => false, "error" => "Celular do cliente nao informado."];
     
     return ["validou" => true, "error" => false];
