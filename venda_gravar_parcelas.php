@@ -62,7 +62,7 @@
 
                 for ($z = 0; $z < $numParcelas; $z++) {
                     $parcelaNum++;
-                    $transacaoID = nextID('lo_transacoes', 'lo_id_transacao');
+                    $transacaoID = nextID('lo_transacoes', 'lo_id_transacao', false, $conn);
                     if (!$transacaoID) throw new Exception("Nao foi possivel gerar o ID da transacao (BD).");
 
                     $dayArg = ' + ' . ($z * 30) . ' days';
