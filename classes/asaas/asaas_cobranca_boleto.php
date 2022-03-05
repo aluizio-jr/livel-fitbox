@@ -1,4 +1,5 @@
 <?php
+    require_once "classes/asaas/asaas_cobranca_retorno.php";
 
     function asaasCobrancaBoleto($dadosCobranca, $conn) {
         try {

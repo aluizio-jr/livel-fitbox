@@ -1,5 +1,6 @@
 <?php
-
+    require_once "classes/asaas/asaas_cobranca_retorno.php";
+    
     function asaasCobrancaLinkPagamento($dadosCobranca, $conn) {
         try {
             $linksGerados = array();
