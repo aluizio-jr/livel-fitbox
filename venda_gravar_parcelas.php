@@ -158,7 +158,7 @@
             $hasAsaasProcessed = false;
 
             foreach ($processarAsaas as $dadosCobranca) {
-                $retValidaCobranca = asaasCobrancaVaida($dadosCobranca, $conn);
+                $retValidaCobranca = asaasCobrancaValida($dadosCobranca, $conn);
                 if (!$retValidaCobranca['validou']) throw new Exception($retValidaCobranca['error']);
             }
   
