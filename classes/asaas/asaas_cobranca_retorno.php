@@ -124,7 +124,7 @@
                     'h009h_paymentId' => $retAsaas['data'][$i]['id'],
                     'cs009q_id_cobranca_status' => $cobrancaStatusID,
                     'h009h_recibo_link' => $retAsaas['data'][$i]['transactionReceiptUrl'],
-                    'h009h_conciliado' => '0'                    
+                    'h009h_conciliado' => '0',                    
                     'cs009u_id_transacao_tipo' => '0'
                 ];
 
