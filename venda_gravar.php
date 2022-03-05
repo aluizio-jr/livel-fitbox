@@ -41,7 +41,7 @@
             $idVenda = $retVendaMain['idVenda'];
             
 //GRAVA VENDA ITENS
-            $retVendaItens = vendaGravarItens($vendaId, $vendaData['itens'], $conn);
+            $retVendaItens = vendaGravarItens($idVenda, $vendaData['itens'], $conn);
             if (!$retVendaItens['vendaItens'])  throw new Exception($retVendaItens['error']);
 
 //GRAVA VENDA PARCELAS
