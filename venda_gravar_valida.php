@@ -3,13 +3,13 @@
     require_once "classes/functions.php";
     
     function validaVenda($vendaData) {
-        $venda_count = is_array($vendaData);
+        $venda_count = count($vendaData);
         if (!$venda_count) return ["validou" => false, "error" => "Dados da venda nao informados."];
         
-        return ['validou' => false, 
-                'error' => 'idCliente: ' . $vendaData['cliente']['id_cliente'] . 
-                ' - dadosClienteCount: ' . count($vendaData['cliente']['dados_cliente'])
-        ];
+        // return ['validou' => false, 
+        //         'error' => 'idCliente: ' . $vendaData['cliente']['id_cliente'] . 
+        //         ' - dadosClienteCount: ' . count($vendaData['cliente']['dados_cliente'])
+        // ];
 
         if (!$vendaData['cliente']['id_cliente'] && !count($vendaData['cliente']['dados_cliente'])) {
             return ["validou" => false, "error" => "Cliente nao informado."];
