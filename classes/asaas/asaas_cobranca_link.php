@@ -45,7 +45,7 @@
 
                 $linkName = 'C' . $idCliente . 'V' . $idVenda . 'T' . $idTransacao . '_' . $billingType;
 
-                $arrParam = array [
+                $arrParam = array (
                     'Metodo' => 'CobrancaLinkPagamento',
                     'ClienteID' => 1005,
                     'LinkNome' => $linkName,
@@ -55,7 +55,7 @@
                     'chargeType' => $chargeType,
                     'Parcelas' => $parcelas,
                     'Sandbox' => 1
-                ];
+                );
                     
                 $urlParams = http_build_query($arrParam);
                 $url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
