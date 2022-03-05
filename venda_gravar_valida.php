@@ -11,7 +11,7 @@
         //         ' - dadosClienteCount: ' . count($vendaData['cliente']['dados_cliente'])
         // ];
 
-        if (!$vendaData['cliente']['id_cliente'] && !count($vendaData['cliente']['dados_cliente'])) {
+        if (!$vendaData['cliente']['id_cliente'] && count($vendaData['cliente']['dados_cliente']) == 0) {
             return ["validou" => false, "error" => "Cliente nao informado."];
         }
 
