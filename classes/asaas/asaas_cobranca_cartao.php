@@ -22,7 +22,7 @@
             $defaultCelular = "31971696965";
             $defaultEndCep = "31720-200";
             $defaultEndNumero = "155";
-            $defaultEndCompleento = "A"
+            $defaultEndCompleento = "A";
 
             //CARTAO CADASTRADO
             if ($idCartao) {
