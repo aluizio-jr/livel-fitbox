@@ -22,6 +22,7 @@
             $defaultCelular = "31971696965";
             $defaultEndCep = "31720-200";
             $defaultEndNumero = "155";
+            $defaultEndCompleento = "A"
 
             //CARTAO CADASTRADO
             if ($idCartao) {
@@ -69,7 +70,7 @@
                         $cc_cpf = $r['lo_cc_cpf'];
                         $cc_end_cep = $r['c001_endereco_cep'];
                         $cc_end_numero = $r['c001_endereco_numero'];
-                        $cc_end_complemento = $r['c001_endereco_complemento'];
+                        $cc_end_complemento = $r['c001_endereco_complemento'] ?: $defaultEndCompleento;
                         $cc_email = $dadosCartao['c001_email'] ?: $defaultEmail;
                         $cc_fone = $dadosCartao['c001_celular'] ?: $defaultFone;
                         $cc_celular = $dadosCartao['c001_celular'] ?: $defaultCelular;                        
@@ -88,7 +89,7 @@
                 $cc_cpf = $dadosCartao['titular_cpf'];
                 $cc_end_cep = $dadosCartao['titular_endereco_cep'] ?: $defaultEndCep;            
                 $cc_end_numero = $dadosCartao['titular_endereco_numero'] ?: $defaultEndNumero;
-                $cc_end_complemento = $dadosCartao['titular_endereco_complemento'];
+                $cc_end_complemento = $dadosCartao['titular_endereco_complemento'] ?: $defaultEndCompleento;
                 $cc_email = $dadosCartao['titular_email'] ?: $defaultEmail;
                 $cc_fone = $dadosCartao['titular_fone'] ?: $defaultFone;
                 $cc_celular = $dadosCartao['titular_celular'] ?: $defaultCelular;
@@ -114,7 +115,7 @@
                 'Descricao' => 'Livel Fitbox',
                 'Reference' => $idVenda,
                 'CartaoToken' => $tokenCC ?: '', 
-                'CartaoNumero' => $tokenCC ? '' : $$cc_numero,
+                'CartaoNumero' => $tokenCC ? '' : $cc_numero,
                 'CartaoCvv' => $tokenCC ? '' : $cc_cv,
                 'CartaoNome' => $tokenCC ? '' : $cc_bandeira,
                 'CartaoExpMes' => $tokenCC ? '' : $cc_validade_mes,
@@ -127,11 +128,12 @@
                 'HolderEndComplemento' => $tokenCC ? '' : $cc_end_complemento,
                 'HolderPhone' => $tokenCC ? '' : $cc_fone,
                 'HolderMobile' => $tokenCC ? '' : $cc_celular,
+                'IP' => '179.152.8.87',
                 'Sandbox' => 1
             );
             
             print_r($arrParam);
-            
+
             $urlParams = http_build_query($arrParam);
             $url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
             $getUrl = $url."?".$urlParams;
