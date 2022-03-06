@@ -116,7 +116,7 @@
                         'arrTransacoes' => $arrTransacoes,
                         'numParcelas' => $numParcelas,
                         'valorParcela' => $valorTotalParcelas,
-                        'vencimentoParcela' => $transacaoVencimento,
+                        'vencimentoParcela' => $vencimento,
                         'idCliente' => $clienetId,
                         'idVenda' => $vendaId,
                         'idCartao'=> $vendaParcelas[$i]['id_cc'], 
@@ -157,8 +157,9 @@
                 $parcelasGravou++;
                 
             }
-            print_r($processarAsaas);
+            
             foreach ($processarAsaas as $dadosCobranca) {
+                echo $dadosCobranca['formaPagto'] . ' - ';
                 $retValidaCobranca = asaasCobrancaValida($dadosCobranca, $conn);
                 if (!$retValidaCobranca['validou']) throw new Exception($retValidaCobranca['error']);
             }
