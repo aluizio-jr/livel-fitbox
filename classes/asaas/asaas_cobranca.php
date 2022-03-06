@@ -23,7 +23,6 @@
             $retornoAsaas = '';
 
             if ($formaPagto == 4 || $formaPagto == 20) {
-                echo ('Entrou asaasCobranca') . '/n/r';
                 $retCartao = asaasCobrancaCartao($dadosCobranca, $conn);
                 $retornoAsaas = $retCartao['retornoAsaas'];
 
