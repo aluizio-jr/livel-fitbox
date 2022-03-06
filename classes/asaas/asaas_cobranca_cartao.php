@@ -4,7 +4,7 @@
     function asaasCobrancaCartao($dadosCobranca, $conn) {
         try {
             $response = '';
-            
+
             $idCliente = $dadosCobranca['idCliente'];
             $idVenda = $dadosCobranca['idVenda'];
             $formaPagto = $dadosCobranca['formaPagto'];
@@ -142,7 +142,7 @@
             curl_setopt($ch, CURLOPT_TIMEOUT, 80);
 
             $response = curl_exec($ch);
-                
+            echo ('Response Asaas: ') . $response . '/n/r';    
             if(curl_error($ch)) throw new Exception('Request Error: ' . curl_error($ch));
 
             curl_close($ch);

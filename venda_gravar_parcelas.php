@@ -159,7 +159,6 @@
             }
             
             foreach ($processarAsaas as $dadosCobranca) {
-                echo $dadosCobranca['formaPagto'] . ' - ';
                 $retValidaCobranca = asaasCobrancaValida($dadosCobranca, $conn);
                 if (!$retValidaCobranca['validou']) throw new Exception($retValidaCobranca['error']);
             }
