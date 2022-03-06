@@ -157,7 +157,7 @@
                 $parcelasGravou++;
                 
             }
-
+            print_r($processarAsaas);
             foreach ($processarAsaas as $dadosCobranca) {
                 $retValidaCobranca = asaasCobrancaValida($dadosCobranca, $conn);
                 if (!$retValidaCobranca['validou']) throw new Exception($retValidaCobranca['error']);
