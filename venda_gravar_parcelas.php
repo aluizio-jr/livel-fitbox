@@ -25,7 +25,8 @@
                     $dataPagamento = $vendaParcelas[$i]['data_pagamento'];
                 
                 $isParcelamento = ($numParcelas > 1 && ($formaPagto == 4 || $formaPagto == 21));
-                $processarCartao = (($formaPagto == 4 || $formaPagto == 20) && !$isParcelamento && DateDifDays($vencimento) <=0);
+                //$processarCartao = (($formaPagto == 4 || $formaPagto == 20) && !$isParcelamento && DateDifDays($vencimento) <=0);
+                $processarCartao = (($formaPagto == 4 || $formaPagto == 20) && !$isParcelamento);
                 $processarBoleto = ($formaPagto == 21 && !$isParcelamento );
                 $processarLink = ($formaPagto == 22);
 
@@ -156,8 +157,6 @@
                 $parcelasGravou++;
                 
             }
-
-            $hasAsaasProcessed = false;
 
             foreach ($processarAsaas as $dadosCobranca) {
                 $retValidaCobranca = asaasCobrancaValida($dadosCobranca, $conn);
