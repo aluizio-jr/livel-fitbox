@@ -153,6 +153,7 @@
 
             $response = utf8_encode($response);
             $retCobrancaCartao = json_decode($response, true);
+            echo 'Json error: ' . json_last_error();
             
             $cartaoRetorno = asaasCobrancaRetorno($retCobrancaCartao, $dadosCobranca, $conn);
             if (!$cartaoRetorno['retCobrancaRetorno']) throw new Exception($cartaoRetorno['error']);

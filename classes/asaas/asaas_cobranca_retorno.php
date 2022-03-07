@@ -3,7 +3,6 @@
     function asaasCobrancaRetorno($retornoAsaas, $dadosCobranca, $conn) {
         try {
             if (!$retornoAsaas['COBRANCA']['id']) {
-                echo "Entrou erro: ";
                 $retError = $retornoAsaas['COBRANCA']['errors']['description'];
                 if (!$retError) {
                     $retError = 'Erro processamento cobranca (NO_DESC): ' . json_encode($retornoAsaas, true);
