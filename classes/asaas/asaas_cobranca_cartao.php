@@ -81,7 +81,7 @@
         //DADOS CARTAO ENVIADOS
             } else if ($dadosCartao) {
                 $cc_titular = $dadosCartao['titular_nome'];
-                $cc_numero = CryptStr($dadosCartao['cc_numero'],[ 'do'];
+                $cc_numero = CryptStr($dadosCartao['cc_numero'],'do');
                 $cc_validade_mes = $dadosCartao['cc_validade_mes'];
                 $cc_validade_ano = $dadosCartao['cc_validade_ano'];
                 $cc_cv = CryptStr($dadosCartao['cc_cv'],'do');
