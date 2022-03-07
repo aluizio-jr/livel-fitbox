@@ -63,7 +63,7 @@ function validaCliente($vendaCliente) {
 
             if ($result <= 0) throw new Exception("Nao foi possivel gravar o novo cliente (DB): " . mysqli_error($conn)); 
             
-            $retCliente = asaasCienteGravar($clienteID, $conn, 0);
+            $retCliente = asaasCienteGravar($clienteID, $conn, 1);
             if (!$retCliente['idCliente']) throw new Exception("Nao foi possivel gravar o novo cliente (ASAAS): " . $retCliente['error']);
 
             return ["idCliente" => $clienteID, "error" => false];

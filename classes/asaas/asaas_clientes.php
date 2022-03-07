@@ -17,7 +17,7 @@
             if ($idClienteAsaas) return ["idClienteAsaas" => $idClienteAsaas, "error" => false];
 
             $str_sql = "SELECT * FROM c001_alunos WHERE c001_id_aluno_lo = " . $idCliente;
-
+echo $str_sql;
             $rs_cliente = mysqli_query($conn, $str_sql);	   
             $num_cliente = mysqli_num_rows($rs_cliente);  
             if (!$num_cliente > 0) throw new Exception("Nao foi possivel encontrar o cliente: ASAAS_NO_LOCAL"); 

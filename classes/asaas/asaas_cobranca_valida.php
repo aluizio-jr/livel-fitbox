@@ -24,7 +24,7 @@ function asaasCobrancaValida($dadosCobranca, $conn) {
         $idClienteAsaas = $retClienteAsaas['retValor'];
 
         if (!$idClienteAsaas) {
-            $retClienteAsaas = asaasCienteGravar($idCliente);
+            $retClienteAsaas = asaasCienteGravar($idCliente, $conn, 1);
             if (!$retClienteAsaas['idClienteAsaas'])  throw new Exception($retClienteAsaas['error']);
             $idClienteAsaas = $retClienteAsaas['idClienteAsaas'];
         }
