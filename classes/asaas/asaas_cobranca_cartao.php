@@ -112,23 +112,23 @@
                 'Vencimento' => date('Y-m-d'),
                 'Valor' => str_replace(',', '.', $valorParcela),
                 'ParcelasCount' => $numParcelas > 1 ? $numParcelas : '',
-                'ParcelasValorTotal' => $numParcelas > 1 ? str_replace(',', '.', ($numParcelas * $valorParcela)) : '',
+                'ParcelasValorTotal' => $numParcelas > 1 ? str_replace(',', '.', ($valorParcela)) : '',
                 'Descricao' => 'Livel Fitbox',
                 'Reference' => $idVenda,
-                'CartaoToken' => $tokenCC ?: false, 
-                'CartaoNumero' => $tokenCC ? false : $cc_numero,
-                'CartaoCvv' => $tokenCC ? false : $cc_cv,
-                'CartaoNome' => $tokenCC ? false : $cc_bandeira,
-                'CartaoExpMes' => $tokenCC ? false : $cc_validade_mes,
-                'CartaoExpAno' => $tokenCC ? false : $cc_validade_ano,
-                'HolderName' => $tokenCC ? false : $cc_titular,
-                'HolderEmail' => $tokenCC ? false : $cc_email,
-                'HolderCpfCnpj' => $tokenCC ? false : $cc_cpf,
-                'HolderCEP' => $tokenCC ? false : $cc_end_cep,
-                'HolderEndNumero' => $tokenCC ? false : $cc_end_numero,
-                'HolderEndComplemento' => $tokenCC ? false : $cc_end_complemento,
-                'HolderPhone' => $tokenCC ? false : $cc_fone,
-                'HolderMobile' => $tokenCC ? false : $cc_celular,
+                'CartaoToken' => $tokenCC ?: '', 
+                'CartaoNumero' => $tokenCC ? '' : $cc_numero,
+                'CartaoCvv' => $tokenCC ? '' : $cc_cv,
+                'CartaoNome' => $tokenCC ? '' : $cc_bandeira,
+                'CartaoExpMes' => $tokenCC ? '' : $cc_validade_mes,
+                'CartaoExpAno' => $tokenCC ? '' : $cc_validade_ano,
+                'HolderName' => $tokenCC ? '' : $cc_titular,
+                'HolderEmail' => $tokenCC ? '' : $cc_email,
+                'HolderCpfCnpj' => $tokenCC ? '' : $cc_cpf,
+                'HolderCEP' => $tokenCC ? '' : $cc_end_cep,
+                'HolderEndNumero' => $tokenCC ? '' : $cc_end_numero,
+                'HolderEndComplemento' => $tokenCC ? '' : $cc_end_complemento,
+                'HolderPhone' => $tokenCC ? '' : $cc_fone,
+                'HolderMobile' => $tokenCC ? '' : $cc_celular,
                 'IP' => '179.152.8.87',
                 'Sandbox' => 1
             );
@@ -136,10 +136,10 @@
             print_r($arrParam);
 
             $urlParams = http_build_query($arrParam);
-            echo $urlParams;
+            
             $url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
             $getUrl = $url."?".$urlParams;
-
+            echo $getUrl;
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
