@@ -35,26 +35,31 @@
             }
 
             $asaasInfo = getAsaasApiInfo('2', $sandbox);
-            
+
+            $arrParam = array (
+                'Metodo' => 'AlunoCadastro',
+                'ClienteID' => '1005',
+                'AlunoID' => $idCliente,
+                'Nome' => $clienteNome,
+                'Email' => $clienteEmail,
+                'Telefone' => $clienteCelular,
+                'Celular' => $clienteCelular,
+                'CnpjCpf' => $clienteCPF,
+                'Cep' => $clienteEndCEP,
+                'Endereco' => $clienteEndRua,
+                'EndNumero' => $clienteEndNumero,
+                'EndComplemento' => $clienteEndComplemento,
+                'EndBairro' => $clienteEndBairro,
+                'ClienteAsaasID' => null,
+                'Sandbox' => $sandbox
+            );
+
+            $urlParams = http_build_query($arrParam);
             $end_point = $asaasInfo['UrlBase']
-            . "?Metodo=AlunoCadastro"
-            . "&ClienteID=1005"
-            . "&AlunoID=" . $idCliente
-            . "&Nome=" . urlencode($clienteNome)
-            . "&Email=" . urlencode($clienteEmail)
-            . "&Telefone=" . urlencode($clienteCelular)
-            . "&Celular=" . urlencode($clienteCelular)
-            . "&CnpjCpf=" . urlencode($clienteCPF)
-            . "&Cep=" . urlencode($clienteEndCEP)
-            . "&Endereco=" . urlencode($clienteEndRua)
-            . "&EndNumero=" . urlencode($clienteEndNumero)
-            . "&EndComplemento=" . urlencode($clienteEndComplemento)
-            . "&EndBairro=" . urlencode($clienteEndBairro)
-            . "&ClienteAsaasID="
-            . "&Sandbox=" . $sandbox;
+            //$url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
+            $end_point = $end_point."?".$urlParams;
 
             $ch = curl_init();
-    
             curl_setopt($ch, CURLOPT_URL, $end_point);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -67,7 +72,7 @@
             curl_close($ch);
             $response = utf8_encode($response);
             $retCliente = json_decode($response, true);
-echo $response;
+            echo ('Response Asaas Cliente: ') . $response . '/n/r'; 
             if (!$retCliente['ALUNO_CADASTRO']['id'])  throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_ID"); 
 
             $idClienteAsaas = $retCliente['ALUNO_CADASTRO']['id'];
