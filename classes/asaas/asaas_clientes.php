@@ -17,7 +17,7 @@
             if ($idClienteAsaas) return ["idClienteAsaas" => $idClienteAsaas, "error" => false];
 
             $str_sql = "SELECT * FROM c001_alunos WHERE c001_id_aluno_lo = " . $idCliente;
-echo $str_sql;
+
             $rs_cliente = mysqli_query($conn, $str_sql);	   
             $num_cliente = mysqli_num_rows($rs_cliente);  
             if (!$num_cliente > 0) throw new Exception("Nao foi possivel encontrar o cliente: ASAAS_NO_LOCAL"); 
@@ -67,7 +67,7 @@ echo $str_sql;
             curl_close($ch);
             $response = utf8_encode($response);
             $retCliente = json_decode($response, true);
-
+echo $response;
             if (!$retCliente['ALUNO_CADASTRO']['id'])  throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_ID"); 
 
             $idClienteAsaas = $retCliente['ALUNO_CADASTRO']['id'];
