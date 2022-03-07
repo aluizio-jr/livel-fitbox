@@ -55,7 +55,7 @@
             );
 
             $urlParams = http_build_query($arrParam);
-            $end_point = $asaasInfo['UrlBase']
+            $end_point = $asaasInfo['UrlBase'];
             //$url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
             $end_point = $end_point."?".$urlParams;
 
