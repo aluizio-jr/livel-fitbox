@@ -81,10 +81,10 @@
         //DADOS CARTAO ENVIADOS
             } else if ($dadosCartao) {
                 $cc_titular = $dadosCartao['titular_nome'];
-                $cc_numero = $dadosCartao['cc_numero'];
+                $cc_numero = CryptStr($dadosCartao['cc_numero'],[ 'do'];
                 $cc_validade_mes = $dadosCartao['cc_validade_mes'];
                 $cc_validade_ano = $dadosCartao['cc_validade_ano'];
-                $cc_cv = $dadosCartao['cc_cv'];
+                $cc_cv = CryptStr($dadosCartao['cc_cv'],'do');
                 $cc_bandeira = $dadosCartao['cc_bandeira'];
                 $cc_cpf = $dadosCartao['titular_cpf'];
                 $cc_end_cep = $dadosCartao['titular_endereco_cep'] ?: $defaultEndCep;            
