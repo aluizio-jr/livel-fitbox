@@ -103,7 +103,7 @@
                 $filters
             );
             $idClienteAsaas = $retClienteAsaas['retValor'];
-
+            if (!$idClienteAsaas) throw new Exception("Nao foi possivel localizar o ID cliente Asaas: " . $idCliente);
             $arrParam = array (
                 'Metodo' => 'CobrancaCartao',
                 'ClienteID' => 1005,
