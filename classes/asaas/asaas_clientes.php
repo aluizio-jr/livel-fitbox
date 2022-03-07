@@ -34,6 +34,9 @@
                 $clienteEmail =  $r['c001_email'] ?: false;
             }
 
+            $idClienteAsaas = asaasGetCientebyCPF($clienteCPF, $sandbox);
+            if ($idClienteAsaas) return ["idClienteAsaas" => $idClienteAsaas, "error" => false];
+            
             $asaasInfo = getAsaasApiInfo('2', $sandbox);
 
             $arrParam = array (
@@ -50,7 +53,7 @@
                 'EndNumero' => $clienteEndNumero,
                 'EndComplemento' => $clienteEndComplemento,
                 'EndBairro' => $clienteEndBairro,
-                'ClienteAsaasID' => null,
+                'ClienteAsaasID' => false,
                 'Sandbox' => $sandbox
             );
 
@@ -72,7 +75,7 @@
             curl_close($ch);
             $response = utf8_encode($response);
             $retCliente = json_decode($response, true);
-            echo ('Response Asaas Cliente: ') . $response . '/n/r'; 
+
             if (!$retCliente['ALUNO_CADASTRO']['id'])  throw new Exception("Nao foi possivel cadastrar o cliente: ASAAS_NO_ID"); 
 
             $idClienteAsaas = $retCliente['ALUNO_CADASTRO']['id'];
@@ -94,4 +97,41 @@
         } catch(Exception $e) {
             return ["idClienteAsaas" => false, "error" => $e->getMessage()];
         }
+    }
+
+    function asaasGetCientebyCPF($cpfCliente, $sandbox) {
+
+        $idClienteAsaas = false;
+        $asaasInfo = getAsaasApiInfo('2', $sandbox);
+
+        $arrParam = array (
+            'ClienteID' => '1005',
+            'Metodo' => 'AlunosList',
+            'cpfCnpj' => $cpfCliente,
+            'limit' => 1,
+            'Sandbox' => $sandbox
+        );
+
+        $urlParams = http_build_query($arrParam);
+        $end_point = $asaasInfo['UrlBase'];
+        //$url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
+        $end_point = $end_point."?".$urlParams;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $end_point);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type: application/json"
+        ));
+    
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $response = utf8_encode($response);
+        $retCliente = json_decode($response, true);
+
+        if (array_key_exists("data", $retCliente)) $idClienteAsaas = $retCliente['data']['id'];
+
+        return $idClienteAsaas;
     }
