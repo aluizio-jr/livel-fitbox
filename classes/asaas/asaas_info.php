@@ -2,7 +2,7 @@
 
     function getAsaasApiInfo($PlanoID = Null, $Sandbox = 0, $Versao = 3) {
 
-        $url_base  = ($Sandbox == 1 ? "https://fitgroup.com.br/vysor_pay_asaas_sandbox/vysorpay_asaas.php" : "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php");
+        $url_base  = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php"; //($Sandbox == 1 ? "https://fitgroup.com.br/vysor_pay_asaas_sandbox/vysorpay_asaas.php" : "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php");
 
         if($Sandbox == 1) {
             $api_key = "a20295631d7267b84327e12eb6f0784ae053a0bcfe6e63a1ddc804505e882442";
