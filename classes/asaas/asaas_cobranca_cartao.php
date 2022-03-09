@@ -52,8 +52,7 @@
                         FROM
                         lo_aluno_cc
                         INNER JOIN c001_alunos ON lo_aluno_cc.c001_id_aluno_lo = c001_alunos.c001_id_aluno_lo
-                        INNER JOIN cs019a_spay_cartoes ON lo_aluno_cc.cs019a_id_spay_cartao = cs019a_spay_cartoes.cs019a_id_spay_cartao
-                        INNER JOIN cs009e_cartao_administradora ON cs019a_spay_cartoes.cs009e_id_admnistradora = cs009e_cartao_administradora.cs009e_id_admnistradora
+                        INNER JOIN cs009e_cartao_administradora ON lo_aluno_cc.cs009e_id_admnistradora = cs009e_cartao_administradora.cs009e_id_admnistradora
                         WHERE
                         lo_aluno_cc.lo_id_aluno_cc = " . $idCartao;
 
@@ -80,12 +79,21 @@
                 
         //DADOS CARTAO ENVIADOS
             } else if ($dadosCartao) {
+                $id_bandeira = $dadosCartao['cc_bandeira'];
+                $filters = ["cs009e_id_admnistradora" => $id_bandeira];
+        
+                $retBandeira = queryBuscaValor(
+                    'cs009e_cartao_administradora', 
+                    'cs009e_admnistradora_nome', 
+                    $filters
+                );
+                $cc_bandeira = $retBandeira['retValor'];                
+
                 $cc_titular = $dadosCartao['titular_nome'];
                 $cc_numero = CryptStr($dadosCartao['cc_numero'],'do');
                 $cc_validade_mes = $dadosCartao['cc_validade_mes'];
                 $cc_validade_ano = $dadosCartao['cc_validade_ano'];
                 $cc_cv = CryptStr($dadosCartao['cc_cv'],'do');
-                $cc_bandeira = $dadosCartao['cc_bandeira'];
                 $cc_cpf = $dadosCartao['titular_cpf'];
                 $cc_end_cep = $dadosCartao['titular_endereco_cep'] ?: $defaultEndCep;            
                 $cc_end_numero = $dadosCartao['titular_endereco_numero'] ?: $defaultEndNumero;
@@ -93,6 +101,28 @@
                 $cc_email = $dadosCartao['titular_email'] ?: $defaultEmail;
                 $cc_fone = $dadosCartao['titular_fone'] ?: $defaultFone;
                 $cc_celular = $dadosCartao['titular_celular'] ?: $defaultCelular;
+
+                $idCartao = nextID('lo_aluno_cc', 'lo_id_aluno_cc', false, $conn);
+                $cartaoValidade = date("Y-m-t", strtotime($cc_validade_ano . "-" . $cc_validade_mes . "-01"));
+
+                $arrCampos = [
+                    "lo_id_aluno_cc" =>  $idCartao,
+                    "c001_id_aluno_lo" =>  $idCliente,
+                    "cs009e_id_admnistradora" => $id_bandeira,
+                    "lo_cc_numero" => $cc_numero,
+                    "lo_cc_validade" => $cartaoValidade,
+                    "lo_cc_titular" => $cc_titular,
+                    "lo_cc_cv" => $cc_cv,
+                    "lo_cc_token" => false,
+                    "lo_cc_cpf" => false,
+                    "lo_cc_data_exclusao" => false
+                ];
+
+                $str_sql = queryInsert("lo_aluno_cc", $arrCampos);
+
+                mysqli_query($conn, $str_sql);
+                $result = mysqli_affected_rows($conn);
+                $dadosCobranca['idCartao'] = $idCartao;
             }
 
             $filters = ["c001_id_aluno_lo" => $idCliente];

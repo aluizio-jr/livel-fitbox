@@ -31,7 +31,6 @@
                 );
                 
                 $tokenCC = $retCC['retValor'];
-echo ("Cartao ID: " . $idCartao . " | Token: " . $tokenCC);                   
             }
 
             $cobrancaAsaasID = $retornoAsaas['COBRANCA']['id'];
@@ -55,15 +54,15 @@ echo ("Cartao ID: " . $idCartao . " | Token: " . $tokenCC);
           
                 if ($retornoAsaas['COBRANCA']['creditCard']['creditCardToken']) {
                     $arrCampos = [
-                        'c001n_cartao_token' => $retornoAsaas['COBRANCA']['creditCard']['creditCardToken']
+                        'lo_cc_token' => $retornoAsaas['COBRANCA']['creditCard']['creditCardToken']
                     ];
                     
                     $arrWhere = [
-                        'campo_nome' => 'c001n_id_spay_aluno_cartao',
+                        'campo_nome' => 'lo_id_aluno_cc',
                         'campo_valor' => $idCartao
                     ];
         
-                    $str_sql = queryUpdate('c001n_spay_alunos_cartoes', $arrCampos, $arrWhere);
+                    $str_sql = queryUpdate('lo_aluno_cc', $arrCampos, $arrWhere);
                     mysqli_query($conn, $str_sql);
 echo ("Query token: " . $str_sql);
                 }
@@ -71,7 +70,6 @@ echo ("Query token: " . $str_sql);
 
 //ATUALIZA PARCELAMENTO            
             if ($parcelamentoAsaasID && $idParcelamento) {
-echo ("Entrou parcelamento | ");                
                 $arrCampos = [
                     'h009y_id_asaas' => $parcelamentoAsaasID,
                     'h009y_data_transacao' => $dataConfirmed ?: date('Y-m-d')
@@ -84,7 +82,7 @@ echo ("Entrou parcelamento | ");
     
                 $str_sql = queryUpdate('h009y_parcelamentos', $arrCampos, $arrWhere);
                 mysqli_query($conn, $str_sql);
-echo ("Query parcelamento: " . $str_sql);
+
                 $arrParam = [
                     'Metodo' => 'ParcelamentoList',
                     'ClienteID' => 1005,
@@ -106,9 +104,12 @@ echo ("Query parcelamento: " . $str_sql);
     
                 $response = curl_exec($ch);
                 curl_close($ch);                
-                
-                $retAsaas = $response['data'];
-echo ("Ret Parcelamento: " . $retAsaas);
+echo "Retorno Parcelamento List: " . $response;
+
+                $response = utf8_encode($response);
+                $arrResponse = json_decode($response, true);
+
+                $retAsaas = $arrResponse['data'];
     
                 //return ["idClienteAsaas" => $idClienteAsaas, "error" => mysqli_error($conn)];
                 
