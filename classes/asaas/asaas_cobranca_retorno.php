@@ -10,7 +10,7 @@
 
                 throw new Exception($retError);
             } 
-print_r($retornoAsaas);
+
             $idCliente = $dadosCobranca['idCliente'];
             $idVenda = $dadosCobranca['idVenda'];
             $formaPagto = $dadosCobranca['formaPagto'];
@@ -22,7 +22,7 @@ print_r($retornoAsaas);
             $idCartao  = $dadosCobranca['idCartao'] ?: false;
 
             if (($formaPagto == 4 || $formaPagto == 20) && $idCartao) {
-echo ("Entrou forma pagto | ");                
+
                 $filters = ["lo_id_aluno_cc" => $idCartao];
                 $retCC = queryBuscaValor(
                     'lo_aluno_cc', 
@@ -31,6 +31,7 @@ echo ("Entrou forma pagto | ");
                 );
                 
                 $tokenCC = $retCC['retValor'];
+echo ("Cartao ID: " . $idCartao . " | Token: " . $tokenCC);                   
             }
 
             $cobrancaAsaasID = $retornoAsaas['COBRANCA']['id'];
@@ -51,7 +52,7 @@ echo ("Entrou forma pagto | ");
 
 //ATUALIZA TOKEN
             if (($formaPagto == 4 || $formaPagto == 20) && !$tokenCC) {
-echo ("Entrou toekn update | ");                
+          
                 if ($retornoAsaas['COBRANCA']['creditCard']['creditCardToken']) {
                     $arrCampos = [
                         'c001n_cartao_token' => $retornoAsaas['COBRANCA']['creditCard']['creditCardToken']
@@ -63,7 +64,8 @@ echo ("Entrou toekn update | ");
                     ];
         
                     $str_sql = queryUpdate('c001n_spay_alunos_cartoes', $arrCampos, $arrWhere);
-                    mysqli_query($conn, $str_sql);                    
+                    mysqli_query($conn, $str_sql);
+echo ("Query token: " . $str_sql);
                 }
             }   
 
@@ -82,7 +84,7 @@ echo ("Entrou parcelamento | ");
     
                 $str_sql = queryUpdate('h009y_parcelamentos', $arrCampos, $arrWhere);
                 mysqli_query($conn, $str_sql);
-                
+echo ("Query parcelamento: " . $str_sql);
                 $arrParam = [
                     'Metodo' => 'ParcelamentoList',
                     'ClienteID' => 1005,
@@ -106,7 +108,7 @@ echo ("Entrou parcelamento | ");
                 curl_close($ch);                
                 
                 $retAsaas = $response['data'];
-                //if(curl_error($ch))  throw new Exception('Request Error: ' . curl_error($ch));
+echo ("Ret Parcelamento: " . $retAsaas);
     
                 //return ["idClienteAsaas" => $idClienteAsaas, "error" => mysqli_error($conn)];
                 
@@ -117,7 +119,7 @@ echo ("Entrou parcelamento | ");
             $lastIdx = count($retAsaas['data']);
             $lastIdx--;
             for ($i = $lastIdx; $i >=0; $i--) {
-echo ("Entrou for update conta_mov | ");
+
 //CRIA CONTA_MOV_ASAAS                
                 $idMovAsaas = nextID('h009h_asaas_movimento', 'h009h_id_asaas_movimento');
                 if (!$idMovAsaas) throw new Exception('Nao foi possivel gerar o ID da transacao (BD).');
@@ -135,7 +137,7 @@ echo ("Entrou for update conta_mov | ");
 
                 mysqli_query($conn, $str_sql);
                 $result = mysqli_affected_rows($conn);
-
+echo ("Query asaas_mov: " . $str_sql);
 //ATUALIZA CONTA_MOV                
                 $arrCampos = [
                     'h009h_id_asaas_movimento' => $idMovAsaas,
@@ -151,7 +153,7 @@ echo ("Entrou for update conta_mov | ");
     
                 $str_sql = queryUpdate('lo_transacoes', $arrCampos, $arrWhere);
                 mysqli_query($conn, $str_sql);                
-
+echo ("Query transacao: " . $str_sql);
             }
 
             return ['retCobrancaRetorno' => true, 'error' => false];
