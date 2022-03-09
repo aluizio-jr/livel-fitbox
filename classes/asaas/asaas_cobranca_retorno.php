@@ -10,7 +10,7 @@
 
                 throw new Exception($retError);
             } 
-
+print_r($retornoAsaas);
             $idCliente = $dadosCobranca['idCliente'];
             $idVenda = $dadosCobranca['idVenda'];
             $formaPagto = $dadosCobranca['formaPagto'];
@@ -22,6 +22,7 @@
             $idCartao  = $dadosCobranca['idCartao'] ?: false;
 
             if (($formaPagto == 4 || $formaPagto == 20) && $idCartao) {
+echo ("Entrou forma pagto | ");                
                 $filters = ["lo_id_aluno_cc" => $idCartao];
                 $retCC = queryBuscaValor(
                     'lo_aluno_cc', 
@@ -50,6 +51,7 @@
 
 //ATUALIZA TOKEN
             if (($formaPagto == 4 || $formaPagto == 20) && !$tokenCC) {
+echo ("Entrou toekn update | ");                
                 if ($retornoAsaas['COBRANCA']['creditCard']['creditCardToken']) {
                     $arrCampos = [
                         'c001n_cartao_token' => $retornoAsaas['COBRANCA']['creditCard']['creditCardToken']
@@ -67,6 +69,7 @@
 
 //ATUALIZA PARCELAMENTO            
             if ($parcelamentoAsaasID && $idParcelamento) {
+echo ("Entrou parcelamento | ");                
                 $arrCampos = [
                     'h009y_id_asaas' => $parcelamentoAsaasID,
                     'h009y_data_transacao' => $dataConfirmed ?: date('Y-m-d')
@@ -114,7 +117,7 @@
             $lastIdx = count($retAsaas['data']);
             $lastIdx--;
             for ($i = $lastIdx; $i >=0; $i--) {
-
+echo ("Entrou for update conta_mov | ");
 //CRIA CONTA_MOV_ASAAS                
                 $idMovAsaas = nextID('h009h_asaas_movimento', 'h009h_id_asaas_movimento');
                 if (!$idMovAsaas) throw new Exception('Nao foi possivel gerar o ID da transacao (BD).');
