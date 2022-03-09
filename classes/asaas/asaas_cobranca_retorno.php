@@ -86,7 +86,7 @@ echo ("Query token: " . $str_sql);
                 $arrParam = [
                     'Metodo' => 'ParcelamentoList',
                     'ClienteID' => 1005,
-                    'ParcelamentoID' => $idClienteAsaas,
+                    'ParcelamentoID' => $parcelamentoAsaasID,
                     'Xml' => 0,
                     'Sandbox' => 1
                 ];
