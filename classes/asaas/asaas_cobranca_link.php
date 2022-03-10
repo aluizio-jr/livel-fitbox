@@ -71,7 +71,7 @@
                 $urlParams = http_build_query($arrParam);
                 $url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
                 $getUrl = $url."?".$urlParams;
-
+echo $getUrl;
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
