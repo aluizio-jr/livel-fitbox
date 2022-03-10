@@ -6,6 +6,15 @@
             $linksGerados = array();
 
             $idCliente = $dadosCobranca['idCliente'];
+            $filters = ["c001_id_aluno_lo" => $idCliente];
+        
+            $retClienteAsaas = queryBuscaValor(
+                'c001_alunos', 
+                'c001_id_asaas', 
+                $filters
+            );
+            $idClienteAsaas = $retClienteAsaas['retValor'];     
+
             $idVenda = $dadosCobranca['idVenda'];
             $idTransacao = $dadosCobranca['idTransacao'] ?: false;  
             $arrTransacoes = $dadosCobranca['arrTransacoes'];
@@ -49,6 +58,7 @@
                 $arrParam = array (
                     'Metodo' => 'CobrancaLinkPagamento',
                     'ClienteID' => 1005,
+                    'AlunoAsaasID' => $idClienteAsaas,
                     'LinkNome' => $linkName,
                     'LinkDescricao' => $linkDescription,
                     'Valor' => $valor,
