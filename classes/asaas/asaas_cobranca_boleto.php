@@ -32,6 +32,9 @@
                 'ParcelasValorTotal' => $numParcelas > 1 ? str_replace(',', '.', ($numParcelas * $valorParcela)) : '',
                 'Descricao' => 'Livel Fitbox',
                 'Reference' => $idVenda,
+                'Multa' => 0,
+                'Juros' => 0,
+                'IP' => '179.152.8.87',
                 'Sandbox' => 1
             );
                 
