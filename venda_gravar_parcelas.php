@@ -145,7 +145,7 @@
                         'idParcelamento' => null,
                         'arrTransacoes' => $arrTransacoes,
                         'numParcelas' => $linkParcelas,
-                        'valorParcela' => $valorTotalParcelas,
+                        'valorParcela' => $valorParcela,
                         'vencimentoParcela' => $transacaoVencimento,
                         'idCliente' => $clienetId,
                         'idVenda' => $vendaId,

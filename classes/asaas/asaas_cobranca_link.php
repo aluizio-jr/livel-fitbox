@@ -20,7 +20,7 @@
             $arrTransacoes = $dadosCobranca['arrTransacoes'];
             $numParcelas = $dadosCobranca['numParcelas'];
             $valorParcela = $dadosCobranca['valorParcela'];
-            $linkValor = $numParcelas * $valorParcela;
+            $linkValor = $valorParcela;
             $linkValorDesconto =  $linkValor - (($linkValor * 10) / 100 );
 
             $linkTipos = $numParcelas > 1 ? 3 : 1;
