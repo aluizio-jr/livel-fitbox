@@ -105,7 +105,6 @@
 
                 $response = utf8_encode($response);
                 $retAsaasArr = json_decode($response, true);
-echo $response;
                 $retAsaas['data'] = $retAsaasArr['PARCELAMENTO']['data'];
     
                 //return ["idClienteAsaas" => $idClienteAsaas, "error" => mysqli_error($conn)];
@@ -135,11 +134,10 @@ echo $response;
                 ];
 
                 $str_sql = queryInsert('h009h_asaas_movimento', $arrCampos);
-echo 'Query mov_asaas: ' . $str_sql;
                 mysqli_query($conn, $str_sql);
                 $result = mysqli_affected_rows($conn);
-
-//ATUALIZA CONTA_MOV                
+                
+                //ATUALIZA CONTA_MOV                
                 $arrCampos = [
                     'h009h_id_asaas_movimento' => $idMovAsaas,
                     'h009y_id_parcelamento' => $idParcelamento ?: false,
@@ -152,8 +150,9 @@ echo 'Query mov_asaas: ' . $str_sql;
                     'campo_nome' => 'lo_id_transacao',
                     'campo_valor' => $arrTransacoes[$i]
                 ];
-    
+                
                 $str_sql = queryUpdate('lo_transacoes', $arrCampos, $arrWhere);
+echo 'Query cta_mov: ' . $str_sql;
                 mysqli_query($conn, $str_sql);
                 $result = mysqli_affected_rows($conn);
             }
