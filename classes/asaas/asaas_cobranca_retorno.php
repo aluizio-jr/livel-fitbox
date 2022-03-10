@@ -106,9 +106,9 @@ echo ("Query token: " . $str_sql);
                 curl_close($ch);                
 
                 $response = utf8_encode($response);
-                $arrResponse = json_decode($response, true);
+                $retAsaas = json_decode($response, true);
 
-                $retAsaas = $arrResponse['data'];
+                //$retAsaas = $arrResponse['data'];
     
                 //return ["idClienteAsaas" => $idClienteAsaas, "error" => mysqli_error($conn)];
                 
