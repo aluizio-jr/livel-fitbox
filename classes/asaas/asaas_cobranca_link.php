@@ -42,6 +42,7 @@
                         $valor = str_replace(',', '.', ($numParcelas > 1 ? $linkValorDesconto : $linkValor));
                         $parcelas = 1;
                         $linkDescription .= 'Livel Fitbox (A VISTA BOLETO)';
+                        $dueDateLimitDays = 1;
                         break;
 
                     case 3:
