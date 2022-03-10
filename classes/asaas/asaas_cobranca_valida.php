@@ -30,8 +30,8 @@ function asaasCobrancaValida($dadosCobranca, $conn) {
         }
         
         if (!$formaPagto)  throw new Exception('Forma de pagamento nao informada (COB)');
-        echo("Forma pagto: " . $formaPagto);
-        if ($formaPagto == 4 || $formaPagto = 20) {
+
+        if ($formaPagto == 4 || $formaPagto == 20) {
             if ($idCartao) {
                 $filters = ["lo_id_aluno_cc" => $idCartao];
                 $retCC = queryBuscaValor(
