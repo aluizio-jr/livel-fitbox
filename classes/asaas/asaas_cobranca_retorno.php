@@ -138,11 +138,12 @@
 
                 mysqli_query($conn, $str_sql);
                 $result = mysqli_affected_rows($conn);
-echo ("Query asaas_mov: " . $str_sql);
+
 //ATUALIZA CONTA_MOV                
                 $arrCampos = [
                     'h009h_id_asaas_movimento' => $idMovAsaas,
                     'h009y_id_parcelamento' => $idParcelamento ?: false,
+                    'lo_id_aluno_cc' => $idCartao ?: false,
                     'lo_transacao_data_pagamento' => ($formaPagto == 4 || $formaPagto == 20) ? $retAsaas['data'][$i]['estimatedCreditDate'] : false,
                     'lo_transacao_data_conciliacao' => ($formaPagto == 4 || $formaPagto == 20) ? $retAsaas['data'][$i]['estimatedCreditDate'] : false
                 ];
@@ -155,8 +156,6 @@ echo ("Query asaas_mov: " . $str_sql);
                 $str_sql = queryUpdate('lo_transacoes', $arrCampos, $arrWhere);
                 mysqli_query($conn, $str_sql);
                 $result = mysqli_affected_rows($conn);
-
-echo ("Query transacao (" . $result . "): " . $str_sql . "Erro: " . mysqli_error($conn));
             }
 
             return ['retCobrancaRetorno' => true, 'error' => false];
