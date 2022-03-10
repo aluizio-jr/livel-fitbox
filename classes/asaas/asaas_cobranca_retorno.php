@@ -105,7 +105,7 @@
 
                 $response = utf8_encode($response);
                 $retAsaasArr = json_decode($response, true);
-
+echo $response;
                 $retAsaas['data'] = $retAsaasArr['PARCELAMENTO']['data'];
     
                 //return ["idClienteAsaas" => $idClienteAsaas, "error" => mysqli_error($conn)];
@@ -135,7 +135,7 @@
                 ];
 
                 $str_sql = queryInsert('h009h_asaas_movimento', $arrCampos);
-
+echo 'Query mov_asaas: ' . $str_sql;
                 mysqli_query($conn, $str_sql);
                 $result = mysqli_affected_rows($conn);
 

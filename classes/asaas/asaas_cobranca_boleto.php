@@ -50,14 +50,14 @@
             curl_setopt($ch, CURLOPT_TIMEOUT, 80);
 
             $response = curl_exec($ch);
-echo $response;                
+
             if(curl_error($ch))  throw new Exception('Request Error: ' . curl_error($ch));
 
             curl_close($ch);
 
             $response = utf8_encode($response);
             $retCobrancaBoleto = json_decode($response, true);
-print_r($retCobrancaBoleto);
+
             $boletoRetorno = asaasCobrancaRetorno($retCobrancaBoleto, $dadosCobranca, $conn);
             if (!$boletoRetorno['retCobrancaRetorno']) throw new Exception($boletoRetorno['error']);
 
