@@ -35,7 +35,7 @@
 
             $cobrancaAsaasID = $retornoAsaas['COBRANCA']['id'];
             $parcelamentoAsaasID = $idParcelamento ? $retornoAsaas['COBRANCA']['installment'] : null;
-
+echo ("ParcelamentoID: " . $idParcelamento . " | ParcelamentoAsaas: " . $parcelamentoAsaasID);
             $cobrancaStatusEnum = $retornoAsaas['COBRANCA']['status'];
             $filters = ["cs009q_asaas_enum" => $cobrancaStatusEnum];
             $retStatus = queryBuscaValor(
@@ -51,7 +51,6 @@
 
 //ATUALIZA TOKEN
             if (($formaPagto == 4 || $formaPagto == 20) && !$tokenCC) {
-          
                 if ($retornoAsaas['COBRANCA']['creditCard']['creditCardToken']) {
                     $arrCampos = [
                         'lo_cc_token' => $retornoAsaas['COBRANCA']['creditCard']['creditCardToken']
@@ -130,6 +129,7 @@
                     'h009h_paymentId' => $retAsaas['data'][$i]['id'],
                     'cs009q_id_cobranca_status' => $cobrancaStatusID,
                     'h009h_recibo_link' => $retAsaas['data'][$i]['transactionReceiptUrl'],
+                    'h009h_boleto_link' => $formaPagto == 21 ? $retAsaas['data'][$i]['bankSlipUrl'] : false,
                     'h009h_conciliado' => '0',                    
                     'cs009u_id_transacao_tipo' => '0'
                 ];

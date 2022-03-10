@@ -119,8 +119,8 @@
                         'vencimentoParcela' => $vencimento,
                         'idCliente' => $clienetId,
                         'idVenda' => $vendaId,
-                        'idCartao'=> $vendaParcelas[$i]['id_cc'], 
-                        'dadosCartao' => $vendaParcelas[$i]['dados_cc']
+                        'idCartao'=> $vendaParcelas[$i]['id_cc'] ?: null, 
+                        'dadosCartao' => $vendaParcelas[$i]['dados_cc'] ?: null
                     ];          
 
                 } else if ($processarBoleto) {

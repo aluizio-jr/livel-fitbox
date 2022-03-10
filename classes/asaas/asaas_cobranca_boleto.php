@@ -54,7 +54,7 @@
 
             $response = utf8_encode($response);
             $retCobrancaBoleto = json_decode($response, true);
-            
+print_r($retCobrancaBoleto);
             $boletoRetorno = asaasCobrancaRetorno($retCobrancaBoleto, $dadosCobranca, $conn);
             if (!$boletoRetorno['retCobrancaRetorno']) throw new Exception($boletoRetorno['error']);
 
