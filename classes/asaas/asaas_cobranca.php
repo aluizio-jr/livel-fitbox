@@ -31,6 +31,7 @@
             }
 
             if ($formaPagto == 21) {
+echo "Entrou asaas_cobranda (boleto)";                
                 $retBoleto = asaasCobrancaBoleto($dadosCobranca, $conn);
                 if (!$retBoleto['processada']) throw new Exception($retCobranca['error']);
 

@@ -35,7 +35,7 @@
 
             $cobrancaAsaasID = $retornoAsaas['COBRANCA']['id'];
             $parcelamentoAsaasID = $idParcelamento ? $retornoAsaas['COBRANCA']['installment'] : null;
-echo ("ParcelamentoID: " . $idParcelamento . " | ParcelamentoAsaas: " . $parcelamentoAsaasID);
+
             $cobrancaStatusEnum = $retornoAsaas['COBRANCA']['status'];
             $filters = ["cs009q_asaas_enum" => $cobrancaStatusEnum];
             $retStatus = queryBuscaValor(

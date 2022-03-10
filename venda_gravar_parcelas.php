@@ -109,6 +109,7 @@
                     ];
                     
                 } else if ($isParcelamento && $parcelamentoID) {
+echo "Entrou Is Parcelamento";                    
                     $processarAsaas[] = [
                         'formaPagto' => $formaPagto,
                         'idTransacao' => null,
