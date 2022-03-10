@@ -148,7 +148,7 @@ echo ("Query asaas_mov: " . $str_sql);
                 
                 $arrWhere = [
                     'campo_nome' => 'lo_id_transacao',
-                    'campo_valor' => $arrTransacoes[0]
+                    'campo_valor' => $arrTransacoes[$i]
                 ];
     
                 $str_sql = queryUpdate('lo_transacoes', $arrCampos, $arrWhere);
