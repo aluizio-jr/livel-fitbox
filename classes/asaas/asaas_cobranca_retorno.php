@@ -115,6 +115,7 @@
                 $retAsaas = ['data'=> $retornoAsaas];
             }
 
+            rsort($arrTransacoes);
             $lastIdx = count($retAsaas['data']);
             $lastIdx--;
 
