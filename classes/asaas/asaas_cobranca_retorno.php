@@ -104,7 +104,6 @@ echo ("Query token: " . $str_sql);
     
                 $response = curl_exec($ch);
                 curl_close($ch);                
-echo "Retorno Parcelamento List: " . $response;
 
                 $response = utf8_encode($response);
                 $arrResponse = json_decode($response, true);
@@ -116,9 +115,10 @@ echo "Retorno Parcelamento List: " . $response;
             } else if($cobrancaAsaasID) {
                 $retAsaas = ['data'=> $retornoAsaas];
             }
-
+print_r($retAsaas);
             $lastIdx = count($retAsaas['data']);
             $lastIdx--;
+echo ("Count parcelas: " . count($retAsaas['data']));        
             for ($i = $lastIdx; $i >=0; $i--) {
 
 //CRIA CONTA_MOV_ASAAS                
