@@ -152,8 +152,10 @@ echo ("Query asaas_mov: " . $str_sql);
                 ];
     
                 $str_sql = queryUpdate('lo_transacoes', $arrCampos, $arrWhere);
-                mysqli_query($conn, $str_sql);                
-echo ("Query transacao: " . $str_sql);
+                mysqli_query($conn, $str_sql);
+                $result = mysqli_affected_rows($conn);
+
+echo ("Query transacao (" . $result . "): " . $str_sql . "Erro: " . mysqli_error($conn));
             }
 
             return ['retCobrancaRetorno' => true, 'error' => false];
