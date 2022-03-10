@@ -42,7 +42,7 @@ function asaasCobrancaValida($dadosCobranca, $conn) {
                 if (!$retCC['retFn'] && !count($dadosCartao)) throw new Exception("Cartao nao encontrado.");
 
             } else if (!count($dadosCartao)) {
-                throw new Exception("Cartao nao informado.");
+                throw new Exception("Cartao nao informado (cob_val).");
                 
             }
         }
