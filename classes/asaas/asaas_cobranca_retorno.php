@@ -64,7 +64,6 @@
         
                     $str_sql = queryUpdate('lo_aluno_cc', $arrCampos, $arrWhere);
                     mysqli_query($conn, $str_sql);
-echo ("Query token: " . $str_sql);
                 }
             }   
 
@@ -115,10 +114,10 @@ echo ("Query token: " . $str_sql);
             } else if($cobrancaAsaasID) {
                 $retAsaas = ['data'=> $retornoAsaas];
             }
-print_r($retAsaas);
+
             $lastIdx = count($retAsaas['data']);
             $lastIdx--;
-echo ("Count parcelas: " . count($retAsaas['data']));        
+
             for ($i = $lastIdx; $i >=0; $i--) {
 
 //CRIA CONTA_MOV_ASAAS                
