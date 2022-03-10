@@ -22,6 +22,7 @@
             $valorParcela = $dadosCobranca['valorParcela'];
             $linkValor = $valorParcela;
             $linkValorDesconto =  $linkValor - (($linkValor * 10) / 100 );
+            $dueDateLimitDays = 1;
 
             $linkTipos = $numParcelas > 1 ? 3 : 1;
 
@@ -34,6 +35,7 @@
                         $valor = str_replace(',', '.', $linkValor);
                         $parcelas = $numParcelas;
                         $linkDescription .= 'Livel Fitbox  (PARCELAMENTO CARTAO)';
+                        $dueDateLimitDays = 1;
                         break;
 
                     case 2:
@@ -51,6 +53,7 @@
                         $valor = str_replace(',', '.', ($numParcelas > 1 ? $linkValorDesconto : $linkValor));
                         $parcelas = 1;
                         $linkDescription .= 'Livel Fitbox (A VISTA PIX)';
+                        $dueDateLimitDays = 1;
                         break;
                 }
 
@@ -66,13 +69,14 @@
                     'billingType' => $billingType,
                     'chargeType' => $chargeType,
                     'Parcelas' => $parcelas,
+                    'dueDateLimitDays' => $dueDateLimitDays,
                     'Sandbox' => 1
                 );
                     
                 $urlParams = http_build_query($arrParam);
                 $url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
                 $getUrl = $url."?".$urlParams;
-echo $getUrl;
+
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
