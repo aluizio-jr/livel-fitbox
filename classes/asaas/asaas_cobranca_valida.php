@@ -30,6 +30,7 @@ function asaasCobrancaValida($dadosCobranca, $conn) {
         }
         
         if (!$formaPagto)  throw new Exception('Forma de pagamento nao informada (COB)');
+        echo("Forma pagto: " . $formaPagto);
         if ($formaPagto == 4 || $formaPagto = 20) {
             if ($idCartao) {
                 $filters = ["lo_id_aluno_cc" => $idCartao];
@@ -39,7 +40,7 @@ function asaasCobrancaValida($dadosCobranca, $conn) {
                     $filters
                 );
 
-                if (!$retCC['retFn'] && !count($dadosCartao)) throw new Exception("Cartao nao encontrado.");
+                if (!$retCC['retFn'] && !count($dadosCartao)) throw new Exception("Cartao nao encontrado (COB).");
 
             } else if (!count($dadosCartao)) {
                 throw new Exception("Cartao nao informado (cob_val).");
@@ -57,12 +58,12 @@ function asaasCobrancaValida($dadosCobranca, $conn) {
             );
             $clientCpf = $retClienteCpf['retValor'];
             
-            if (!$clientCpf) throw new Exception("CPF obrigatorio para pagamento via boleto.");
+            if (!$clientCpf) throw new Exception("CPF obrigatorio para pagamento via boleto (COB).");
         }
 
-        if (!$idTransacao && !$idParcelamento) throw new Exception("Origem da cobranca nao informada.");
-        if (!$numParcelas) throw new Exception("Numero de parcelas nao informado.");
-        if (!$valorParcela) throw new Exception("Valor da parcela nao informado.");
+        if (!$idTransacao && !$idParcelamento) throw new Exception("Origem da cobranca nao informada (COB).");
+        if (!$numParcelas) throw new Exception("Numero de parcelas nao informado (COB).");
+        if (!$valorParcela) throw new Exception("Valor da parcela nao informado (COB).");
 
         return ["validou" => true, "error" => false];
 
