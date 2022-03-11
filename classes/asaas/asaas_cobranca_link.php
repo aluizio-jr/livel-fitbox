@@ -34,7 +34,7 @@
                         $chargeType = $numParcelas > 1 ? 'INSTALLMENT' : 'DETACHED';
                         $valor = str_replace(',', '.', $linkValor);
                         $parcelas = $numParcelas;
-                        $linkDescription .= 'Livel Fitbox  (PARCELAMENTO CARTAO)';
+                        $linkDescription = 'Livel Fitbox  (PARCELAMENTO CARTAO)';
                         $dueDateLimitDays = 1;
                         break;
 
@@ -43,7 +43,7 @@
                         $chargeType = 'DETACHED';
                         $valor = str_replace(',', '.', ($numParcelas > 1 ? $linkValorDesconto : $linkValor));
                         $parcelas = 1;
-                        $linkDescription .= 'Livel Fitbox (A VISTA BOLETO)';
+                        $linkDescription = 'Livel Fitbox (A VISTA BOLETO)';
                         $dueDateLimitDays = 1;
                         break;
 
@@ -52,7 +52,7 @@
                         $chargeType = 'DETACHED';
                         $valor = str_replace(',', '.', ($numParcelas > 1 ? $linkValorDesconto : $linkValor));
                         $parcelas = 1;
-                        $linkDescription .= 'Livel Fitbox (A VISTA PIX)';
+                        $linkDescription = 'Livel Fitbox (A VISTA PIX)';
                         $dueDateLimitDays = 1;
                         break;
                 }
@@ -76,7 +76,7 @@
                 $urlParams = http_build_query($arrParam);
                 $url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
                 $getUrl = $url."?".$urlParams;
-
+echo $getUrl;
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
