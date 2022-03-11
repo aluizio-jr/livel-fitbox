@@ -23,6 +23,9 @@
             $linkValor = $valorParcela;
             $linkValorDesconto =  $linkValor - (($linkValor * 10) / 100 );
             $dueDateLimitDays = 1;
+            
+            $dayArg = ' + 30 days';
+            $endDate = date('Y-m-d', strtotime(date('Y-m-d') . $dayArg));
 
             $linkTipos = $numParcelas > 1 ? 3 : 1;
 
@@ -70,6 +73,7 @@
                     'chargeType' => $chargeType,
                     'Parcelas' => $parcelas,
                     'dueDateLimitDays' => $dueDateLimitDays,
+                    'endDate' => $endDate,
                     'Sandbox' => 1
                 );
                     
