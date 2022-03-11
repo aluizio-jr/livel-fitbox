@@ -72,8 +72,8 @@
                     'billingType' => $billingType,
                     'chargeType' => $chargeType,
                     'Parcelas' => $parcelas,
-                    'dueDateLimitDays' => $dueDateLimitDays,
                     'endDate' => $endDate,
+                    'dueDateLimitDays' => $dueDateLimitDays,
                     'Sandbox' => 1
                 );
                     
