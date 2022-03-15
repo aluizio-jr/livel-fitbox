@@ -60,6 +60,7 @@
             return ["validou" => false, "error" => $e->getMessage()];
         }
     }
+    
     $vendaPost = file_get_contents('php://input');
     $vendaPost = utf8_decode($vendaPost);
     $vendaPost = json_decode($vendaPost, true); //getPost();

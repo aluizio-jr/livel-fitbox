@@ -80,7 +80,7 @@
                 $urlParams = http_build_query($arrParam);
                 $url = "https://fitgroup.com.br/vysor_pay_asaas/vysorpay_asaas.php";
                 $getUrl = $url."?".$urlParams;
-echo $getUrl;
+
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
@@ -89,7 +89,7 @@ echo $getUrl;
                 curl_setopt($ch, CURLOPT_TIMEOUT, 80);
 
                 $response = curl_exec($ch);
-echo $response;                    
+
                 if(curl_error($ch))  throw new Exception('Request Error: ' . curl_error($ch));
 
                 curl_close($ch);
