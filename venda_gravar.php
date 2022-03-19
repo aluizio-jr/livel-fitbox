@@ -65,7 +65,7 @@
     $vendaPost = utf8_decode($vendaPost);
     $vendaPost = json_decode($vendaPost, true); //getPost();
 
-    echo ('Count: ' . count($vendaPost) . ' - Tipo: ' . $vendaPost['id_venda_tipo']);
+    echo ("Count: " . count($vendaPost) . " - Tipo: " . $vendaPost['id_venda_tipo']);
 
     // $retVenda = gravarVenda($vendaPost);
     // echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
