@@ -67,7 +67,7 @@
 
     $strRet = "Total: " . count($vendaPost);
     echo $strRet;
-
+var_dump($vendaPost);
     // $retVenda = gravarVenda($vendaPost);
     // echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
 
