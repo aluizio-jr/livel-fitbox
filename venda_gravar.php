@@ -62,7 +62,9 @@
     }
 
     $vendaPost = file_get_contents('php://input');
+    echo "1 - " . $vendaPost;
     $vendaPost = utf8_decode($vendaPost);
+    echo "2 - " . $vendaPost;
     $vendaData = json_decode($vendaPost, true); //getPost();
     $strRet = "Total: " . count($vendaData);
     $strRet .= " - IsArray: " . is_array($vendaData);
