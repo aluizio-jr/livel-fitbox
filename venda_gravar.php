@@ -65,7 +65,7 @@
     $vendaPost = utf8_decode($vendaPost);
     $vendaPost = json_decode($vendaPost, true); //getPost();
 
-    
+    print_r($vendaPost);
     $strRet = "Count: " . count($vendaPost);
     $strRet .=  " - Tipo: " . $vendaPost['id_venda_tipo'];
     echo $strRet;
