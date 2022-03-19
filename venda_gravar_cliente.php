@@ -42,7 +42,7 @@ function validaCliente($vendaCliente) {
             if ($clienteDados['id_cliente']) 
                 return ["idCliente" => $clienteDados['id_cliente'], "error" =>false];
             
-            $clienteID = nextID('c001_alunos', 'c001_id_aluno_lo');
+            $clienteID = nextID('c001_alunos', 'c001_id_aluno_lo', false, $conn);
             $arrCampos = [
                 "c001_id_aluno_lo" =>  $clienteID,
                 "c001_nome_completo" => $clienteDados['dados_cliente']['nome_completo'],
@@ -64,9 +64,10 @@ function validaCliente($vendaCliente) {
             if ($result <= 0) throw new Exception("Nao foi possivel gravar o novo cliente (DB): " . mysqli_error($conn)); 
             
             $retCliente = asaasCienteGravar($clienteID, $conn, 1);
-            if (!$retCliente['idCliente']) throw new Exception("Nao foi possivel gravar o novo cliente (ASAAS): " . $retCliente['error']);
+            if (!$retCliente['idClienteAsaas']) throw new Exception("Nao foi possivel gravar o novo cliente (ASAAS): " . $retCliente['error']);
 
             return ["idCliente" => $clienteID, "error" => false];
+
 
         } catch(Exception $e) {
             return ["idCliente" => false, "error" => $e->getMessage()];

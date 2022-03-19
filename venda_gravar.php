@@ -33,9 +33,9 @@
 //VALIDA O CLIENTE
             $retCliente = vendaGravarCliente($vendaData['cliente'], $conn);
             if (!$retCliente['idCliente']) throw new Exception($retCliente['error']);
+            $idCliente = $retCliente['idCliente'];
 
 //GRAVA VENDA MAIN
-            $idCliente = $retCliente['idCliente'];
             $retVendaMain = vendaGravarMain($vendaData, $idCliente, $conn);
             if (!$retVendaMain['idVenda'])  throw new Exception($retVendaMain['error']);
             $idVenda = $retVendaMain['idVenda'];
@@ -60,13 +60,13 @@
             return ["validou" => false, "error" => $e->getMessage()];
         }
     }
-    
+
     $vendaPost = file_get_contents('php://input');
     $vendaPost = utf8_decode($vendaPost);
     $vendaPost = json_decode($vendaPost, true); //getPost();
 
     //echo ('ID cliente: ' . $vendaPost['cliente']['id_cliente'] . ' - Dados cli: ' . count($vendaPost['cliente']['dados_cliente']));
-
+print_r($vendaPost);
     $retVenda = gravarVenda($vendaPost);
     echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
 
