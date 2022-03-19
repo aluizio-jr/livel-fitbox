@@ -65,8 +65,11 @@
     $vendaPost = utf8_decode($vendaPost);
     $vendaPost = json_decode($vendaPost, true); //getPost();
 
-    $retVenda = gravarVenda($vendaPost);
-    echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
+    $strRet = "Total: " . count($vendaPost);
+    echo $strRet;
+
+    // $retVenda = gravarVenda($vendaPost);
+    // echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
 
     
 
