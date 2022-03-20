@@ -94,7 +94,7 @@
                             $filters
                         );
                         
-                        if (!$retCartai['retFn']) throw new Exception("ID do cartao nao encontrado.");
+                        if (!$retCartai['retFn']) throw new Exception("ID do cartao nao encontrado. " . $retCartai['error']);
 
                     }
 
