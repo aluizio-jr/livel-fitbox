@@ -80,13 +80,13 @@
 
                 $fpagList = [4, 20];
                 if (in_array($vendaParcelas[$i]['forma_pagamento'], $fpagList)) {
-                    if (!$vendaParcelas[$i]['id_cc'] && !count(!$vendaParcelas[$i]['dados_cc'])) {
+                    if (!$vendaParcelas[$i]['id_cartao'] && !count(!$vendaParcelas[$i]['dados_cc'])) {
                         throw new Exception("(Parcela: " . $item . ") Cartao de credito nao informado.");
                     }
 
                     
-                    if ($vendaParcelas[$i]['id_cc']) {
-                        $filters = ["lo_id_aluno_cc" => $vendaParcelas[$i]['id_cc']];
+                    if ($vendaParcelas[$i]['id_cartao']) {
+                        $filters = ["lo_id_aluno_cc" => $vendaParcelas[$i]['id_cartao']];
     
                         $retCartaoo = queryBuscaValor(
                             'lo_aluno_cc', 
@@ -98,7 +98,7 @@
 
                     }
 
-                    if (!$vendaParcelas[$i]['id_cc']) {
+                    if (!$vendaParcelas[$i]['id_cartao']) {
                         if (!$vendaParcelas[$i]['dados_cc'][0]['cc_numero']) throw new Exception("Numero do cartao nao informado.");
                         if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_mes']) throw new Exception("Mes da validade do cartao nao informado.");
                         if (!$vendaParcelas[$i]['dados_cc'][0]['cc_validade_ano']) throw new Exception("Ano da validade do cartao nao informado.");
