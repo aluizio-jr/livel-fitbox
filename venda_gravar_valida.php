@@ -50,7 +50,7 @@
                     ' JOIN lo_plano_vigencias USING(lo_id_plano) '
                 );
 
-                if ($itemPlano['error']) {
+                if (!$itemPlano['retFn']) {
                     throw new Exception("(Item: " . $item . ") Erro busca categoria Live:" . $itemPlano['error']);
                 }
 
