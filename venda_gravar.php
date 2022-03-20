@@ -62,16 +62,11 @@
     }
 
     $vendaPost = file_get_contents('php://input');
-    echo "1 - " . $vendaPost;
     $vendaPost = utf8_decode($vendaPost);
-    echo "2 - " . $vendaPost;
     $vendaData = json_decode($vendaPost, true); //getPost();
-    $strRet = "Total: " . count($vendaData);
-    $strRet .= " - IsArray: " . is_array($vendaData);
-    echo $strRet;
 
-    // $retVenda = gravarVenda($vendaData);
-    // echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
+    $retVenda = gravarVenda($vendaData);
+    echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
 
     
 
