@@ -104,7 +104,7 @@
                         'vencimentoParcela' => $transacaoVencimento,
                         'idCliente' => $clienetId,
                         'idVenda' => $vendaId,
-                        'idCartao'=> $vendaParcelas[$i]['id_cc'], 
+                        'idCartao'=> $vendaParcelas[$i]['id_cartao'], 
                         'dadosCartao' => $vendaParcelas[$i]['dados_cc']
                     ];
                     
@@ -119,7 +119,7 @@
                         'vencimentoParcela' => $vencimento,
                         'idCliente' => $clienetId,
                         'idVenda' => $vendaId,
-                        'idCartao'=> $vendaParcelas[$i]['id_cc'] ?: null, 
+                        'idCartao'=> $vendaParcelas[$i]['id_cartao'] ?: null, 
                         'dadosCartao' => $vendaParcelas[$i]['dados_cc'] ?: null
                     ];          
 
