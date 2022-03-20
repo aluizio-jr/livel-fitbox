@@ -80,7 +80,7 @@
 
                 $fpagList = [4, 20];
                 if (in_array($vendaParcelas[$i]['forma_pagamento'], $fpagList)) {
-                    if (!$vendaParcelas[$i]['id_cc'] || !count(!$vendaParcelas[$i]['dados_cc'])) {
+                    if (!$vendaParcelas[$i]['id_cc'] && !count(!$vendaParcelas[$i]['dados_cc'])) {
                         throw new Exception("(Parcela: " . $item . ") Cartao de credito nao informado.");
                     }
 
