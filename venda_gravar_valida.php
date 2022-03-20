@@ -88,13 +88,13 @@
                     if ($vendaParcelas[$i]['id_cc']) {
                         $filters = ["lo_id_aluno_cc" => $vendaParcelas[$i]['id_cc']];
     
-                        $tokenCC = queryBuscaValor(
+                        $retCartaoo = queryBuscaValor(
                             'lo_aluno_cc', 
                             'lo_cc_token', 
                             $filters
                         );
                         
-                        if (!$tokenCC) throw new Exception("Token do cartao nao encontrado.");
+                        if (!$retCartai['retFn']) throw new Exception("ID do cartao nao encontrado.");
 
                     }
 
