@@ -134,7 +134,7 @@
 				$retRs = $r[$campoRet];
 			}                         
 
-			return ["retFn" => ($num_rs > 0), "retValor" => $retRs, "error" => $str_sql];
+			return ["retFn" => ($num_rs > 0), "retValor" => $retRs, "error" => false];
 
 		} catch(Exception $e) {
 			return ["retFn" => false, "retValor" => false, "error" => $e->getMessage()];

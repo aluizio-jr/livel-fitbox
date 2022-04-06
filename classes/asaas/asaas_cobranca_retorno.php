@@ -142,7 +142,7 @@
                     'h009h_id_asaas_movimento' => $idMovAsaas,
                     'h009y_id_parcelamento' => $idParcelamento ?: false,
                     'lo_id_aluno_cc' => $idCartao ?: false,
-                    'lo_transacao_data_pagamento' => ($formaPagto == 4 || $formaPagto == 20) ? $retAsaas['data'][$i]['estimatedCreditDate'] : false,
+                    'lo_transacao_data_pagamento' => ($formaPagto == 4 || $formaPagto == 20) ? $retAsaas['data'][$i]['confirmedDate'] : false,
                     'lo_transacao_data_conciliacao' => ($formaPagto == 4 || $formaPagto == 20) ? $retAsaas['data'][$i]['estimatedCreditDate'] : false
                 ];
                 
