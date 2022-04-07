@@ -3,9 +3,9 @@
 	function bd_connect_livel() {
 
 		$host="fitgroup.com.br";
-		$user="fitgroup_livel";
+		$user="fitgroup_fitbox";
 		$pass="dhvtnc0809vps";
-		$bd="fitgroup_livel";
+		$bd="fitgroup_fitbox";
 
 		$cnn = mysqli_connect ($host, $user, $pass, $bd);
 
