@@ -32,34 +32,35 @@
             $itens_count = count($vendaItens);
             if (!$itens_count) throw new Exception("Itens da venda nao informados."); //return ["validou"=>false, "error" => "Itens da venda nao informados: " . $itens_count];
             
-            for ($i=0; $i<$itens_count; $i++) {
-                $item++;
-                if (!$vendaItens[$i]['id_plano_vigencia']) {
-                    throw new Exception("(Item: " . $item . ") ID do plano nao informado.");
-                }
+            // for ($i=0; $i<$itens_count; $i++) {
+            //     $item++;
+            //     if (!$vendaItens[$i]['id_plano_vigencia']) {
+            //         throw new Exception("(Item: " . $item . ") ID do plano nao informado.");
+            //     }
 
-                $filters = [
-                    "lo_id_plano_vigencia" => $vendaItens[$i]['id_plano_vigencia'],
-                    "lo_id_produto_categoria" => 1
-                ];
+            //     $filters = [
+            //         "lo_id_plano_vigencia" => $vendaItens[$i]['id_plano_vigencia'],
+            //         "lo_id_produto_categoria" => 1
+            //     ];
 
-                $itemPlano = queryBuscaValor(
-                    'lo_plano_produtos', 
-                    ' COUNT(*) ', 
-                    $filters,
-                    ' JOIN lo_plano_vigencias USING(lo_id_plano) '
-                );
+            //     $itemPlano = queryBuscaValor(
+            //         'lo_plano_produtos', 
+            //         ' COUNT(*) ', 
+            //         $filters,
+            //         ' JOIN lo_plano_vigencias USING(lo_id_plano) '
+            //     );
 
-                if (!$itemPlano['retFn']) {
-                    throw new Exception("(Item: " . $item . ") Erro busca categoria Live:" . $itemPlano['error']);
-                }
+            //     if (!$itemPlano['retFn']) {
+            //         throw new Exception("(Item: " . $item . ") Erro busca categoria Live:" . $itemPlano['error']);
+            //     }
 
-                if ($itemPlano['retValor'] && !$vendaItens[$i]['id_live_turma']) {
-                    throw new Exception("(Item: " . $item . ") Turma de Live nao informada");
-                }
+            //     if ($itemPlano['retValor'] && !$vendaItens[$i]['id_live_turma']) {
+            //         throw new Exception("(Item: " . $item . ") Turma de Live nao informada");
+            //     }
 
-                return ["validou"=>true, "error" => ""];
-            }
+            // }
+            
+            return ["validou"=>true, "error" => ""];
 
         } catch(Exception $e) {
             return ["validou"=>false, "error" => $e->getMessage()];
