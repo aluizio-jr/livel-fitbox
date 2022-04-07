@@ -64,7 +64,7 @@
     $vendaPost = file_get_contents('php://input');
     $vendaPost = utf8_decode($vendaPost);
     $vendaData = json_decode($vendaPost, true); //getPost();
-
+print_r($vendaData);
     $retVenda = gravarVenda($vendaData);
     echo json_encode($retVenda, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
 
