@@ -7,6 +7,7 @@
             $dataVenda = $vendaData['data_venda'] ?: date('Y-m-d');
             $horaVenda = $vendaData['hora_venda'] ?: date('H:i:s');
             $statusVenda = 1;
+            $vendaRenovacaoId = $vendaData['id_venda_renovacao'] ?: "NULL";
 
             $str_sql = " INSERT INTO lo_vendas (
                 lo_id_venda,
@@ -23,8 +24,8 @@
                 . "'" . $dataVenda . "',"
                 . "'" . $horaVenda . "',"
                 . $statusVenda . ","
-                . $vendaData['id_venda_renovacao'] ?: "NULL";
-                $str_sql .= ")";
+                . $vendaRenovacaoId
+                . ")";
 
                 mysqli_query($conn, $str_sql);
                 $result = mysqli_affected_rows($conn);
