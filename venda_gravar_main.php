@@ -5,6 +5,7 @@
             if (!$vendaID) throw new Exception("Nao foi possivel gerar o ID da venda.");
             
             $dataVenda = $vendaData['data_venda'] ?: date('Y-m-d');
+            $dataVenda = date ('Y-m-d', strtotime($dataVenda));
             $horaVenda = $vendaData['hora_venda'] ?: date('H:i:s');
             $statusVenda = 1;
             $vendaRenovacaoId = $vendaData['id_venda_renovacao'] ?: "NULL";
