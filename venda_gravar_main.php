@@ -13,7 +13,6 @@
             $str_sql = " INSERT INTO lo_vendas (
                 lo_id_venda,
                 c001_id_aluno_lo,
-                lo_id_venda_tipo,
                 lo_venda_data,
                 lo_venda_hora,
                 lo_id_venda_status,
@@ -21,7 +20,6 @@
                 ) VALUES ("
                 . $vendaID . ","
                 . $idCliente . ","
-                . $vendaData['id_venda_tipo'] . ","
                 . "'" . $dataVenda . "',"
                 . "'" . $horaVenda . "',"
                 . $statusVenda . ","

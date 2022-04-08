@@ -19,10 +19,10 @@
         if (!$clienteCheck['validou'])
             return ["validou"=>false, "error" => $clienteCheck['error']];
 
-        if (!$vendaData['id_venda_tipo']) return ["validou"=>false, "error" => "Tipo de venda nao informado."];
+        // if (!$vendaData['id_venda_tipo']) return ["validou"=>false, "error" => "Tipo de venda nao informado."];
         
-        if ($vendaData['id_venda_tipo'] == 3 && !$vendaData['id_venda_renovacao']) 
-            return ["validou" => false, "error" => "ID da venda renovada nao informado."];
+        // if ($vendaData['id_venda_tipo'] == 3 && !$vendaData['id_venda_renovacao']) 
+        //     return ["validou" => false, "error" => "ID da venda renovada nao informado."];
 
         return ["validou" => true, "error" => ""];
     }
